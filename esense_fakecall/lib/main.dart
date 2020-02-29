@@ -44,9 +44,9 @@ class _OverviewState extends State<Overview>{
   Widget build(BuildContext context) {
 
     final _kTabPages = <Widget>[
-      InCallView(),
+      //InCallView(),
       HomeView(),
-      //ESenseTest(),
+      ESenseTest(),
       //Center(child: Icon(Icons.alarm, size: 64.0, color: Colors.cyan)),
     ];
 
@@ -80,9 +80,12 @@ class _OverviewState extends State<Overview>{
 
 
 
-    Future<void> loadNewAudioFile() async {
-      File file = await FilePicker.getFile(type: FileType.AUDIO);
+    String loadNewAudioFile() {
+      String path = FilePicker.getFilePath(type: FileType.AUDIO) as String;
+      //File file = await FilePicker.getFile(type: FileType.AUDIO);
+      print(path);
       
+      return path;
     }
 
 
@@ -98,7 +101,11 @@ class _OverviewState extends State<Overview>{
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){loadNewAudioFile();},
+        onPressed: (){Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => InCallView())
+                      );
+              },
       ),
   
     );

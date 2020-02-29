@@ -11,8 +11,7 @@ class HomeView extends StatefulWidget {
 
 
   class _HomeViewState extends State<HomeView> {
-final TextStyle dropdownMenuItem =
-      TextStyle(color: Colors.black, fontSize: 18);
+      final TextStyle dropdownMenuItem = TextStyle(color: Colors.black, fontSize: 18);
 
   final primary = Color(0xff696b9e);
   final secondary = Color(0xfff29a94);
@@ -20,31 +19,9 @@ final TextStyle dropdownMenuItem =
   final List<Map> callList = [
     {
       "name": "Hamster tot",
-      "location": "path",
-    },
-    {
-      "name": "Schwester tot",
-      "location": "path",
-    },
-    {
-      "name": "DU tot",
-      "location": "path",
-    },
-    {
-      "name": "Notfall",
-      "location": "path",
-    },
-    {
-      "name": "Haus brennt",
-      "location": "path",
-    },
-    {
-      "name": "Random",
-      "location": "path",
-    },
-    {
-      "name": "Unfall",
-      "location": "path",
+      "audioLocation": "path",
+      "callerNameLocation": "callerName",
+      "picLocation": "pic",
     },
     
     
@@ -71,73 +48,7 @@ final TextStyle dropdownMenuItem =
               trailing: Icon(Icons.more_vert),
             ),
         ),
-
-
-        /*body: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            SingleChildScrollView(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-
-                  const SizedBox(height: 10.0),
-                  Card(
-                    elevation: 6.0,
-                    margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: Icon(
-                            Icons.lock_outline,
-                            color: Colors.purple,
-                          ),
-                          title: Text("Change Password"),
-                          trailing: Icon(Icons.keyboard_arrow_right),
-                          onTap: () {
-                            //open change password
-                          },
-                          
-                        ),
-                        SwitchListTile(
-                        activeColor: Colors.purple,
-                        contentPadding: const EdgeInsets.all(0),
-                        value: false,
-                        title: Text("Received notification"),
-                        onChanged: (val) {},
-                      ),
-                        
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),*/
       );
-    
-    /*return Scaffold(
-      backgroundColor: Color(0xfff0f0f0),
-      body: SingleChildScrollView(
-        child:  Stack(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: double.infinity,
-                child: ListView.builder(
-                    itemCount: callList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return buildList(context, index);
-                    }),
-              ),
-            ],
-        ),
-      ),
-    );*/
   }
 
   Widget buildList(BuildContext context, int index) {
