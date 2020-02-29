@@ -1,0 +1,189 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+MERGED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+MERGED from [:esense_flutter] C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\build\esense_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\36d0aad45f62512b56fba63a4fc8c369\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\83fcd277273fa695bf2c7baa1ff698cc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3732274a1a1fc24a05e267f5d4688685\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3d6de275fe65b30409ffb700a4e9dd12\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\cb2a91df7d764c872cab41a4106db087\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2742c4ca42d4517fa9136a8015dd5815\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\145bd8ce1df5f983664f25fac9e4cfdc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3eeb31000030867dc1fc4c07234b00da\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3ed66b92a9ef57971587e6e0d1923dfb\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a357b41220d37714dc88d1905fcf32f3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7533a377a57759995975236fda32e74\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7537e14ead81b7d6d1f42bbdad134bf3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\faf4c607facd892903d65977fffdbc5f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\b4b752690cb1c5a163c9ec311231eede\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a44509ac8406d1095cb8eebfd95ab417\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\8dd502ff509c7435ebcd9ba183586a94\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\506b6a9c63c63734e6fd60a2283f5d11\AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\818206c0a10443cc87a2c00bedf9f512\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\259344a727538e07b9858da3eb338fc6\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\dedc1924644f12a27df067054bdb03cd\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2e14d44187ad8418f4b5200f67d268b0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7b2684db5b0fa536b3f32eca7a23164\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:2:11-53
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:3:11-57
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:3:11-57
+	android:versionCode
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:1-49:12
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:9:5-66
+MERGED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:9:5-66
+MERGED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:9:5-66
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:9:22-64
+uses-permission#android.permission.PACKAGE_USAGE_STATS
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:10:5-113
+	tools:ignore
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:10:76-111
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:10:22-75
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:14:5-67
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:14:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:15:5-73
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:15:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:16:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:17:5-79
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:17:22-76
+uses-feature#android.hardware.bluetooth_le
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:18:5-89
+	android:required
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:18:64-87
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:18:19-63
+application
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:25:5-48:19
+MERGED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\506b6a9c63c63734e6fd60a2283f5d11\AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\506b6a9c63c63734e6fd60a2283f5d11\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:22:18-86
+	android:label
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:27:9-36
+	android:icon
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:28:9-43
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:26:9-57
+activity#dk.cachet.esense_flutter_example.MainActivity
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:29:9-47:20
+	android:launchMode
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:31:13-43
+	android:hardwareAccelerated
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:34:13-47
+	android:windowSoftInputMode
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:35:13-55
+	android:configChanges
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:33:13-144
+	android:theme
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:32:13-47
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:30:13-41
+meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:40:13-42:40
+	android:value
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:42:17-37
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:41:17-82
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:43:13-46:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:44:17-68
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:44:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:45:17-76
+	android:name
+		ADDED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml:45:27-74
+uses-sdk
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+MERGED from [:esense_flutter] C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\build\esense_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:esense_flutter] C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\build\esense_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\36d0aad45f62512b56fba63a4fc8c369\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\36d0aad45f62512b56fba63a4fc8c369\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\83fcd277273fa695bf2c7baa1ff698cc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\83fcd277273fa695bf2c7baa1ff698cc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3732274a1a1fc24a05e267f5d4688685\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3732274a1a1fc24a05e267f5d4688685\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3d6de275fe65b30409ffb700a4e9dd12\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3d6de275fe65b30409ffb700a4e9dd12\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\cb2a91df7d764c872cab41a4106db087\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\cb2a91df7d764c872cab41a4106db087\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2742c4ca42d4517fa9136a8015dd5815\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2742c4ca42d4517fa9136a8015dd5815\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\145bd8ce1df5f983664f25fac9e4cfdc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\145bd8ce1df5f983664f25fac9e4cfdc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3eeb31000030867dc1fc4c07234b00da\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3eeb31000030867dc1fc4c07234b00da\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3ed66b92a9ef57971587e6e0d1923dfb\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\3ed66b92a9ef57971587e6e0d1923dfb\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a357b41220d37714dc88d1905fcf32f3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a357b41220d37714dc88d1905fcf32f3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7533a377a57759995975236fda32e74\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7533a377a57759995975236fda32e74\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7c69a76d09cc4ea68c7c7b112d520194\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7537e14ead81b7d6d1f42bbdad134bf3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\7537e14ead81b7d6d1f42bbdad134bf3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\faf4c607facd892903d65977fffdbc5f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\faf4c607facd892903d65977fffdbc5f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\b4b752690cb1c5a163c9ec311231eede\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\b4b752690cb1c5a163c9ec311231eede\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a44509ac8406d1095cb8eebfd95ab417\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\a44509ac8406d1095cb8eebfd95ab417\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\8dd502ff509c7435ebcd9ba183586a94\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\8dd502ff509c7435ebcd9ba183586a94\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\506b6a9c63c63734e6fd60a2283f5d11\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\506b6a9c63c63734e6fd60a2283f5d11\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\818206c0a10443cc87a2c00bedf9f512\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\818206c0a10443cc87a2c00bedf9f512\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\259344a727538e07b9858da3eb338fc6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\259344a727538e07b9858da3eb338fc6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\dedc1924644f12a27df067054bdb03cd\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\dedc1924644f12a27df067054bdb03cd\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2e14d44187ad8418f4b5200f67d268b0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\2e14d44187ad8418f4b5200f67d268b0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7b2684db5b0fa536b3f32eca7a23164\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lscho\.gradle\caches\transforms-2\files-2.1\d7b2684db5b0fa536b3f32eca7a23164\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lscho\Desktop\flutter-plugins-master\packages\esense_flutter\example\android\app\src\debug\AndroidManifest.xml
