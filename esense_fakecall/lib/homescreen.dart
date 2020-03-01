@@ -1,6 +1,9 @@
 
+import 'package:eSenseFC/storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'musicPlayer.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -11,31 +14,8 @@ class HomeView extends StatefulWidget {
 
 
   class _HomeViewState extends State<HomeView> {
-      final TextStyle dropdownMenuItem = TextStyle(color: Colors.black, fontSize: 18);
 
-  final primary = Color(0xff696b9e);
-  final secondary = Color(0xfff29a94);
-
-  final List<Map> callList = [
-    {
-      "name": "Hamster tot",
-      "audioLocation": "path",
-      "callerNameLocation": "callerName",
-      "picLocation": "pic",
-    },
-    {
-      "name": "Hamster lebendig",
-      "audioLocation": "path",
-      "callerNameLocation": "callerName",
-      "picLocation": "pic",
-    },
-    
-    
-  ];
-
-  addCallToList(Map call) {
-    callList.add(call);
-  }
+  final StorageHandler sh = new StorageHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +23,7 @@ class HomeView extends StatefulWidget {
 
 
       body: ListView.builder(
-            itemCount: callList.length,
+            itemCount: sh.callList.length,
             itemBuilder: (context, index) {
               	return Card (
                     elevation: 6.0,
@@ -54,9 +34,15 @@ class HomeView extends StatefulWidget {
 
                     child: ListTile(
                            leading: Icon(Icons.ac_unit),
-                           title: Text('${callList[index]['name']}'),
+                           title: Text(sh.getSettingName(index)),
                            subtitle: Text("Subtitle"),
                            trailing: Icon(Icons.more_vert),
+                           //TODO SettingsView anzeigen
+                           onTap: (){Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(index))
+                                      ),
+                                    );},
                     ),
 
                 );

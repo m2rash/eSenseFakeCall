@@ -6,14 +6,21 @@ import 'package:just_audio/just_audio.dart';
 
 
 class InCallView extends StatelessWidget {
-  
-  String path = "/data/user/0/com.example.esense_fakecall/cache/Doctor Who Theme 5.mp3";
+
+  String path;
   final player = AudioPlayer();
+
+
+  InCallView(String path) {
+    this.path = path;
+  }
+  
 
  
 
 
   Future<void> playFakeMessage(String path) async {
+    print(path);
     
     var duration = await player.setUrl(path);
 
