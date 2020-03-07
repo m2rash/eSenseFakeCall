@@ -1,7 +1,7 @@
 
 class StorageHandler {
 
-  final List<Map> callList = [
+  List<Map> callList = [
     {
       "name": "Hamster tot",
       "audioLocation": "/data/user/0/com.example.esense_fakecall/cache/Doctor Who Theme 5.mp3",
@@ -37,14 +37,29 @@ class StorageHandler {
   }
 
 
+  Map getCallSettings(int i) {
+
+  }
+
+
 
 
   addCallSettingsToList(Map callSetting) {
+    //TODO longTermSave
     callList.add(callSetting);
   }
 
-  createNewCallSetting() {
 
+  Map createNewCallSeting() {
+    Map cs = {
+      "name": "_Enter SettingName_",
+      "audioLocation": "_audioLocation_",
+      "callerName": "_Enter CallerName_",
+      "picLocation": "_pic Location_",
+      "activ": "false",
+    };
+
+    addCallSettingsToList(cs);
   }
 
 }

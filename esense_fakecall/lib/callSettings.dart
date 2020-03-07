@@ -1,12 +1,16 @@
 import 'package:eSenseFC/homescreen.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'storage.dart';
+
 class CallSettingsView extends StatelessWidget {
 
-  Map settings;
+  int settings;
+  StorageHandler sh;
 
-  CallSettingsView (Map settings) {
+  CallSettingsView (StorageHandler sh, int index) {
       this.settings = settings;
+      this.sh = sh;
   }
 
   
