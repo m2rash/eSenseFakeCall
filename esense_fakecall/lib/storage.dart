@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHandler {
 
-  String keyListId = 'keylist4';
+  String keyListId = 'keylist5';
   List<String> keyList;
   List<List<String>> settings;
 
@@ -19,6 +19,9 @@ class StorageHandler {
 
 
 //
+
+
+
 
   Future<List<List<String>>> getAllSettings() async {
     await initHandler();
@@ -37,8 +40,6 @@ class StorageHandler {
 
     return settings;
   }
-
-
   ///Returns a StringList with all information about a fakeCall.
   ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, activ?]
   Future<List<String>> getSetting(int index) async {
@@ -48,6 +49,15 @@ class StorageHandler {
     return prefs.getStringList(keyList[index]);
   }
 
+
+
+
+
+
+  createSettingForEdit() {
+    //TODO
+  }
+
   ///Stores a StringList with all information about a fakeCall.
   ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, activ?]
   ///returns true for success and false if the new one is a duplicate
@@ -55,6 +65,7 @@ class StorageHandler {
     await initHandler();
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    //TODO await for Bedingung?
     //No duplicates
     if (!prefs.containsKey(setting[0])) {
       prefs.setStringList(setting[0], setting);
@@ -76,6 +87,14 @@ class StorageHandler {
     print('new keyLength> ' + keyList.length.toString());
     prefs.setStringList(keyListId, keyList);
   }
+
+
+
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,8 +127,13 @@ class StorageHandler {
 
 
 
-  setCallerName(List<String> setting, String newCallerName) {
+  setCallerName(List<String> setting, String newCallerName) async {
     setting[1] = newCallerName;
+
+    await initHandler();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setStringList(setting[0], setting);
   }
 
 

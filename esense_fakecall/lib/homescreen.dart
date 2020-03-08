@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'musicPlayer.dart';
+import 'callSettingsEdit.dart';
 
 class HomeView extends StatelessWidget {
 
@@ -43,6 +44,7 @@ class HomeView extends StatelessWidget {
               return Center(child: Text('Error!!!!!'));
             }
             List<List<String>> settings = snapshot.data ?? [];
+            //TODO nicht aktive settings abfangen
             print('in Overview Settingslength: ' + settings.length.toString());
             return ListView.builder( 
               itemCount: settings.length,
@@ -64,7 +66,7 @@ class HomeView extends StatelessWidget {
                             //TODO SettingsView anzeigen
                             onTap: (){Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => CallSettingsView(index),
+                                        MaterialPageRoute(builder: (context) => CallSettingsEditView(index),
                                         )
                                       );
                                     }
