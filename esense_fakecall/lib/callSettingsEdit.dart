@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:io';
 import 'dart:math';
 
@@ -72,6 +71,7 @@ class CallSettingsEditView extends StatelessWidget{
                       textCapitalization: TextCapitalization.sentences,
                       style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
                       decoration: InputDecoration(
+                          
                           hintText: sh.getSettingName(setting),
                           suffixIcon: Icon(Icons.edit)
                       ),
@@ -147,7 +147,7 @@ class CallSettingsEditView extends StatelessWidget{
                         ),
                         title: TextField(
                             textCapitalization: TextCapitalization.sentences,
-                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 28),
+                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                             decoration: InputDecoration(
                                 hintText: sh.getCallerName(setting),
                             ),
