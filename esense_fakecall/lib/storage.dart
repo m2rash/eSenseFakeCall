@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHandler {
 
-  String keyListId = 'keylist3';
+  String keyListId = 'keylist4';
   List<String> keyList;
   List<List<String>> settings;
 
@@ -132,6 +132,7 @@ class StorageHandler {
     if (newSettingName != null) {
 
       int index = keyList.indexOf(setting[0]);
+      String oldName = setting[0];
 
       setting[0] = newSettingName;
 
@@ -142,6 +143,7 @@ class StorageHandler {
       await prefs.setStringList(setting[0], setting);
       keyList[index] = setting[0];
       await prefs.setStringList(keyListId, keyList);
+      await prefs.remove(oldName);
     }
   }
 

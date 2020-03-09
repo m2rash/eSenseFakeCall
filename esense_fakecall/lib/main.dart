@@ -104,7 +104,7 @@ class _OverviewState extends State<Overview>{
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){new StorageHandler().storeSetting(['test', 'test', 'test', 'test', 'true']);/*Navigator.push(
+        onPressed: (){new StorageHandler().storeSetting(['test4', 'test', 'test', 'test', 'true']);/*Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => )
                       );*/
