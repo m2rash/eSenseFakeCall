@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHandler {
 
-  String keyListId = 'keylist5';
+  String keyListId = 'keylist3';
   List<String> keyList;
   List<List<String>> settings;
 
@@ -68,6 +68,7 @@ class StorageHandler {
     //TODO await for Bedingung?
     //No duplicates
     if (!prefs.containsKey(setting[0])) {
+      print('object');
       prefs.setStringList(setting[0], setting);
       keyList.add(setting[0]);
       prefs.setStringList(keyListId, keyList);
@@ -127,13 +128,56 @@ class StorageHandler {
 
 
 
+  setSettingName(List<String> setting, String newSettingName) async {
+    if (newSettingName != null) {
+
+      int index = keyList.indexOf(setting[0]);
+      keyList[index] = newSettingName;
+
+      setting[0] = newSettingName;
+
+      await initHandler();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setStringList(setting[0], setting);
+      prefs.setStringList(keyListId, keyList);
+    }
+  }
+
   setCallerName(List<String> setting, String newCallerName) async {
-    setting[1] = newCallerName;
+    if (newCallerName != null) {
 
-    await initHandler();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+      setting[1] = newCallerName;
 
-    prefs.setStringList(setting[0], setting);
+      await initHandler();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setStringList(setting[0], setting);
+    }
+  }
+
+  setImageLocation(List<String> setting, String path) async{
+    if (path != null) {
+      
+      setting[2] = path;
+
+      await initHandler();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setStringList(setting[0], setting);
+    }
+  }
+  
+  setAudioPath(List<String> setting, String path) async{
+    if (path != null) {
+      
+      setting[3] = path;
+
+      await initHandler();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setStringList(setting[0], setting);
+    }
   }
 
 
