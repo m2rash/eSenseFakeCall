@@ -66,7 +66,7 @@ class HomeView extends StatelessWidget {
                             //TODO SettingsView anzeigen
                             onTap: (){Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => CallSettingsEditView(index),
+                                        MaterialPageRoute(builder: (context) => CallSettingsView(index),
                                         )
                                       );
                                     }

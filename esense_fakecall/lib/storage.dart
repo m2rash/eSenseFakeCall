@@ -132,15 +132,16 @@ class StorageHandler {
     if (newSettingName != null) {
 
       int index = keyList.indexOf(setting[0]);
-      keyList[index] = newSettingName;
 
       setting[0] = newSettingName;
 
       await initHandler();
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
+
       await prefs.setStringList(setting[0], setting);
-      prefs.setStringList(keyListId, keyList);
+      keyList[index] = setting[0];
+      await prefs.setStringList(keyListId, keyList);
     }
   }
 

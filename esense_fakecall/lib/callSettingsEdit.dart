@@ -15,7 +15,7 @@ class CallSettingsEditView extends StatelessWidget{
   StorageHandler sh = new StorageHandler();
   int settingIndex;
   Future<List<String>> f;
-
+//TODO Zwischenspeichern
   CallSettingsEditView (int settingIndex) {
       this.settingIndex = settingIndex;
       f = sh.getSetting(settingIndex);
@@ -53,7 +53,6 @@ class CallSettingsEditView extends StatelessWidget{
   Widget build(BuildContext context) {
 
 
-
     return FutureBuilder(
             future: sh.getSetting(settingIndex),
             builder: (context, snapshot) {
@@ -64,6 +63,7 @@ class CallSettingsEditView extends StatelessWidget{
                 return Center(child: Text('Error!!!!!'));
               }
             List<String> setting = snapshot.data ?? [];
+            print('EditView Setting: ' + setting.toString());
             return Scaffold(
               // backgroundColor: Colors.deepOrange,
               appBar: AppBar(
@@ -75,7 +75,7 @@ class CallSettingsEditView extends StatelessWidget{
                           hintText: sh.getSettingName(setting),
                           suffixIcon: Icon(Icons.edit)
                       ),
-                      onSubmitted: (String value) async {
+                      onSubmitted: (String value) {
                         sh.setSettingName(setting, value);
                       },
                 ),

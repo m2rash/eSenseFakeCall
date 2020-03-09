@@ -4,6 +4,7 @@ import 'package:eSenseFC/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'callSettingsEdit.dart';
 import 'storage.dart';
 
 class CallSettingsView extends StatelessWidget {
@@ -112,10 +113,14 @@ class CallSettingsView extends StatelessWidget {
 
 
             floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.play_arrow),
+                child: Icon(Icons.edit),
                 onPressed: () async {
-                  await sh.deleteSetting(settingIndex);
-                  Navigator.pop(context);
+                  
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CallSettingsEditView(settingIndex),
+                        )
+                      );
                 },
             ),
           );
