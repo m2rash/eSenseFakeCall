@@ -4,6 +4,7 @@ import 'package:eSenseFC/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'AltEdit.dart';
 import 'callSettingsEdit.dart';
 import 'storage.dart';
 
@@ -118,7 +119,7 @@ class CallSettingsView extends StatelessWidget {
                   
                   Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CallSettingsEditView(settingIndex),
+                        MaterialPageRoute(builder: (context) => AltCallSettingsEditView(settingIndex),
                         )
                       );
                 },

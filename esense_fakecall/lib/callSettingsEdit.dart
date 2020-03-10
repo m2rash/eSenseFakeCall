@@ -10,16 +10,29 @@ import 'package:flutter/material.dart';
 import 'storage.dart';
 
 
-class CallSettingsEditView extends StatelessWidget{
+class CallSettingsEditView extends StatefulWidget{
 
+  int settingIndex;
+  CallSettingsEditView (int settingIndex) {
+      this.settingIndex = settingIndex; 
+  }
+
+@override
+  SettingEditState createState() => SettingEditState(settingIndex);
+}
+
+
+class SettingEditState extends State<CallSettingsEditView>{
   StorageHandler sh = new StorageHandler();
   int settingIndex;
-  Future<List<String>> f;
-//TODO Zwischenspeichern
-  CallSettingsEditView (int settingIndex) {
-      this.settingIndex = settingIndex;
-      f = sh.getSetting(settingIndex);
+  List<String> setting;
+
+
+  SettingEditState (int settingIndex) {
+      this.settingIndex = settingIndex; 
   }
+//TODO Zwischenspeichern
+  
 
 
 
@@ -31,22 +44,27 @@ class CallSettingsEditView extends StatelessWidget{
   
   Future<String> _setAudioFile(List<String> setting, BuildContext context) {
       Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
-      path.then((value) => sh.setAudioPath(setting, value).then(_refreshView(context)));
+          print('loading');
+
+      path.then((value) => _refreshView(value));
+      print('loaded');
+  }
+
+  _aktPath(String path) {
+    this.setting[3] = path;
   }
 
 
 
-
-
-  _refreshView(BuildContext context) {
-    print('refresh');
+  _refreshView(String value) {
+    print('refresh' + value);
     //TODO nur Notlösung: evtl futuerBuilder austauschen
-    Navigator.pop(context);
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => this)
-    );
-                                  
+    // Navigator.pop(context);
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => this)
+    // );
+    this.setState(() {setting[3] = value;});
   }
   
   @override
@@ -62,7 +80,7 @@ class CallSettingsEditView extends StatelessWidget{
               if(snapshot.hasError) {
                 return Center(child: Text('Error!!!!!'));
               }
-            List<String> setting = snapshot.data ?? [];
+            this.setting = snapshot.data ?? [];
             print('EditView Setting: ' + setting.toString());
             return Scaffold(
               // backgroundColor: Colors.deepOrange,
@@ -197,6 +215,10 @@ class CallSettingsEditView extends StatelessWidget{
 
   
   }
+
+  
   
 
 }
+
+
