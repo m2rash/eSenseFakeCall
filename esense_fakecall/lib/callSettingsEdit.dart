@@ -23,6 +23,15 @@ class CallSettingsEditView extends StatelessWidget{
   }
 
 
+  Future<bool> _saveSetting() {
+    sh.setAudioPath(setting, audioPathField.path);
+    return sh.storeSetting(setting, settingIndex);
+  }
+
+  _exit (BuildContext context) {
+    Navigator.pop(context);
+    if (Navigator.canPop(context)) {Navigator.pop(context);}
+  }
 
 
   _setProfilImage(List<String> setting) {
@@ -30,25 +39,11 @@ class CallSettingsEditView extends StatelessWidget{
       path.then((value) => {});
   }
   
-  // _setAudioFile(List<String> setting,) {
-  //     Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
-  //     path.then((value) => );
-  // }
 
 
 
 
 
-  _refreshView(BuildContext context) {
-    print('refresh');
-    //TODO nur Notlösung: evtl futuerBuilder austauschen
-    Navigator.pop(context);
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => this)
-    );
-                                  
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -90,8 +85,7 @@ class CallSettingsEditView extends StatelessWidget{
                     //color: Colors.red,
                     textTheme: ButtonTextTheme.primary,
                     onPressed: (){
-                      Navigator.pop(context);
-                      Navigator.pop(context);
+                      _saveSetting().then((value) => {_exit(context)});
                     },
                 )
               ],

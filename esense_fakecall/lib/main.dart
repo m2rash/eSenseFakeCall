@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eSenseFC/callSettingsEdit.dart';
 import 'package:eSenseFC/gyroTest.dart';
 import 'package:eSenseFC/homescreen.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,9 @@ class _OverviewState extends State<Overview>{
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){new StorageHandler().storeSetting(['test4', 'test', 'test', 'test', 'true']);/*Navigator.push(
+        onPressed: (){new StorageHandler().createSettingForEdit().then((value) => {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => CallSettingsEditView(-1)))
+                                          });/*Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => )
                       );*/

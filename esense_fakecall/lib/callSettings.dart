@@ -115,7 +115,6 @@ class CallSettingsView extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
                 child: Icon(Icons.edit),
                 onPressed: () async {
-                  
                   Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CallSettingsEditView(settingIndex),
