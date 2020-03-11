@@ -14,25 +14,26 @@ class CallSettingsEditView extends StatelessWidget{
 
   StorageHandler sh = new StorageHandler();
   int settingIndex;
-  Future<List<String>> f;
-//TODO Zwischenspeichern
+  List<String> setting;
+  AudioPathField audioPathField;
+
+
   CallSettingsEditView (int settingIndex) {
       this.settingIndex = settingIndex;
-      f = sh.getSetting(settingIndex);
   }
 
 
 
 
-  Future<String> _setProfilImage(List<String> setting) {
+  _setProfilImage(List<String> setting) {
       Future<String> path = FilePicker.getFilePath(type: FileType.IMAGE);
-      path.then((value) => sh.setImageLocation(setting, value));
+      path.then((value) => {});
   }
   
-  Future<String> _setAudioFile(List<String> setting, BuildContext context) {
-      Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
-      path.then((value) => sh.setAudioPath(setting, value).then(_refreshView(context)));
-  }
+  // _setAudioFile(List<String> setting,) {
+  //     Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
+  //     path.then((value) => );
+  // }
 
 
 
@@ -62,8 +63,10 @@ class CallSettingsEditView extends StatelessWidget{
               if(snapshot.hasError) {
                 return Center(child: Text('Error!!!!!'));
               }
-            List<String> setting = snapshot.data ?? [];
+            this.setting = snapshot.data ?? [];
+            this.audioPathField = AudioPathField(sh.getAudioLocation(setting));
             print('EditView Setting: ' + setting.toString());
+
             return Scaffold(
               // backgroundColor: Colors.deepOrange,
               appBar: AppBar(
@@ -86,7 +89,10 @@ class CallSettingsEditView extends StatelessWidget{
                     shape: StadiumBorder(),
                     //color: Colors.red,
                     textTheme: ButtonTextTheme.primary,
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
                 )
               ],
                 backgroundColor: Colors.transparent,
@@ -127,6 +133,7 @@ class CallSettingsEditView extends StatelessWidget{
                                 ),
                                 elevation: 5.0,
                                 onTap: () {
+                                  print(sh.getCallerName(setting));
                                   _setProfilImage(setting);
                                 },
                           ),
@@ -159,21 +166,7 @@ class CallSettingsEditView extends StatelessWidget{
                   ),
                   
 
-
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: .0),
-                    child:
-                      ListTile(
-                        leading: Container(
-                          width: 40, // can be whatever value you want
-                          alignment: Alignment.center,
-                          child: Icon(Icons.play_circle_filled, size: 27,),
-                        ),
-                        title: Text('Audio File', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
-                        subtitle: Text(sh.getAudioLocation(setting), style: TextStyle(fontSize: 19.0),),
-                        onTap: () {_setAudioFile(setting, context);},
-                      ),
-                  ),
+                  audioPathField,
                   
                 ],
               ),
@@ -185,7 +178,7 @@ class CallSettingsEditView extends StatelessWidget{
                   onPressed: () async {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(setting)),
+                        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(this.setting)),
                         )
                       );
                   },
@@ -198,5 +191,53 @@ class CallSettingsEditView extends StatelessWidget{
   
   }
   
+
+}
+
+class AudioPathField extends StatefulWidget{
+
+  String path;
+
+  AudioPathField(String path) {
+    this.path = path;
+  }
+
+  @override
+  AudioPathFieldState createState() => AudioPathFieldState(path);
+  
+}
+
+class AudioPathFieldState extends State<AudioPathField> {
+
+  String path;
+
+  AudioPathFieldState (String path) {
+      this.path = path;
+  }
+
+  _setAudioFile() {
+    Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
+       path.then((value) => this.setState(() {
+        this.path = value;
+      }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: new EdgeInsets.symmetric(horizontal: .0),
+        child:
+          ListTile(
+            leading: Container(
+              width: 40, // can be whatever value you want
+              alignment: Alignment.center,
+              child: Icon(Icons.play_circle_filled, size: 27,),
+            ),
+            title: Text('Audio File', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
+            subtitle: Text(path, style: TextStyle(fontSize: 19.0),),
+            onTap: () {_setAudioFile();},
+          ),
+      );
+  }
 
 }
