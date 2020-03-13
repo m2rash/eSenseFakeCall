@@ -11,21 +11,6 @@ class HomeView extends StatelessWidget {
 
   StorageHandler sh = new StorageHandler();
 
-  /*@override
-  State<StatefulWidget> createState() => _HomeViewState(sh);
- 
-}
-
-
-
-  class _HomeViewState extends State<HomeView> {
-
-    StorageHandler sh;
-
-    _HomeViewState(StorageHandler sh){
-      this.sh = sh;
-    }*/
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +34,6 @@ class HomeView extends StatelessWidget {
             return ListView.builder( 
               itemCount: settings.length,
               itemBuilder: (context, index) {
-                  print(settings[0]);
                   return Card (
                       elevation: 6.0,
                       margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
@@ -58,19 +42,21 @@ class HomeView extends StatelessWidget {
                       ),
 
                       child: ListTile(
-                        //TODO Bilder und Container drumrum siehe Callsetting
-                            leading: Icon(Icons.ac_unit),
+                            leading: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                  //TODO Bilder
+                                child: Icon(Icons.play_circle_filled, size: 27,),
+                              ),
                             title: Text(sh.getSettingName(settings[index])),
                             subtitle: Text("Subtitle"),
-                            trailing: Icon(Icons.more_vert),
-                            //TODO SettingsView anzeigen
+                            trailing: OverviewPopUp(this.sh, index),
                             onTap: (){Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => CallSettingsView(index),
                                         )
                                       );
                                     }
-                                      //print(sh.getSettingName(sh.getSetting(index)));},
                       ),
 
                 );
@@ -86,55 +72,71 @@ class HomeView extends StatelessWidget {
 
 
 
+class OverviewPopUp extends StatelessWidget{
 
+  StorageHandler sh;
+  int index;
+  BuildContext context;
 
+  OverviewPopUp(StorageHandler sh, int index) {
+    this.sh = sh;
+    this.index = index;
+  }
 
-  /*Widget buildList(BuildContext context, int index) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.white,
-      ),
-      width: double.infinity,
-      height: 85,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      child: Row(
+  _play() {
+    //TODO
+  }
 
-
-
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 50,
-            height: 50,
-            margin: EdgeInsets.only(right: 15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(width: 3, color: secondary),
-              /*image: DecorationImage(
-                  image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
-                  fit: BoxFit.fill),*/
-            ),
-          ),
-
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  callList[index]['name'],
-                  style: TextStyle(
-                      color: primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 21),
-                ),
-                
-              ],
-            ),
-          )
-        ],
-      ),
+  _edit(int index) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CallSettingsEditView(index)),
     );
-    }*/
+  }
+
+  _delete() {
+    //TODO
+  }
+
+  void choiceAction(String choice){
+      if(choice == 'Play'){
+        this._play();
+      }else if(choice == 'Edit'){
+        this._edit(index);
+      }else if(choice == 'Delete'){
+        this._delete();
+      }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return PopupMenuButton<String>(
+        onSelected: choiceAction,
+        itemBuilder: (BuildContext context) => [
+          PopupMenuItem(
+                  value: 'Play',
+                  child: ListTile(
+                    leading: Icon(Icons.play_arrow),
+                    title: Text('Play'),
+                  )
+          ),
+          PopupMenuItem(
+                  value: 'Edit',
+                  child: ListTile(
+                    leading: Icon(Icons.edit),
+                    title: Text('Edit'),
+                  )
+          ),
+          PopupMenuItem(
+                  value: 'Delete',
+                  child: ListTile(
+                    leading: Icon(Icons.delete_forever),
+                    title: Text('Delete'),
+                  )
+          ),
+        ]
+    );
+  }
+}
