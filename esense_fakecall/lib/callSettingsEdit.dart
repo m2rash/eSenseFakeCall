@@ -170,6 +170,8 @@ class CallSettingsEditView extends StatelessWidget{
               floatingActionButton: FloatingActionButton(
                   child: Icon(Icons.play_arrow),
                   onPressed: () async {
+                    sh.setAudioPath(setting, audioPathField.path);
+                    print('Path: ' + audioPathField.path);
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(this.setting)),
@@ -197,23 +199,30 @@ class AudioPathField extends StatefulWidget{
   }
 
   @override
-  AudioPathFieldState createState() => AudioPathFieldState(path);
+  AudioPathFieldState createState() => AudioPathFieldState(path, this);
   
 }
 
 class AudioPathFieldState extends State<AudioPathField> {
 
   String path;
+  AudioPathField field;
 
-  AudioPathFieldState (String path) {
+  AudioPathFieldState (String path, AudioPathField field) {
       this.path = path;
+      this.field = field;
+  }
+
+  _saveAudioFilePath(String path) {
+    this.setState(() {
+        this.path = path;
+    });
+    field.path = path;
   }
 
   _setAudioFile() {
     Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
-       path.then((value) => this.setState(() {
-        this.path = value;
-      }));
+       path.then((value) => _saveAudioFilePath(value));
   }
 
   @override
