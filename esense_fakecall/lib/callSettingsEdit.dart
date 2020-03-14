@@ -1,8 +1,5 @@
-import 'dart:io';
-import 'dart:math';
-
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:eSenseFC/musicPlayer.dart';
+import 'package:eSenseFC/profileImage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +13,7 @@ class CallSettingsEditView extends StatelessWidget{
   int settingIndex;
   List<String> setting;
   AudioPathField audioPathField;
+  ImageField imageField;
 
 
   CallSettingsEditView (int settingIndex) {
@@ -25,6 +23,7 @@ class CallSettingsEditView extends StatelessWidget{
 
   Future<bool> _saveSetting() {
     sh.setAudioPath(setting, audioPathField.path);
+    sh.setImageLocation(setting, imageField.path);
     return sh.storeSetting(setting, settingIndex);
   }
 
@@ -34,21 +33,10 @@ class CallSettingsEditView extends StatelessWidget{
   }
 
 
-  _setProfilImage(List<String> setting) {
-      Future<String> path = FilePicker.getFilePath(type: FileType.IMAGE);
-      path.then((value) => {});
-  }
-  
-
-
-
-
 
   
   @override
   Widget build(BuildContext context) {
-
-
     return FutureBuilder(
             future: sh.getSetting(settingIndex),
             builder: (context, snapshot) {
@@ -60,10 +48,10 @@ class CallSettingsEditView extends StatelessWidget{
               }
             this.setting = snapshot.data ?? [];
             this.audioPathField = AudioPathField(sh.getAudioLocation(setting));
+            this.imageField = ImageField(sh.getPicLocation(setting), sh.getCallerName(setting));
             print('EditView Setting: ' + setting.toString());
 
             return Scaffold(
-              // backgroundColor: Colors.deepOrange,
               appBar: AppBar(
                 title: TextField(
                       textCapitalization: TextCapitalization.sentences,
@@ -77,12 +65,10 @@ class CallSettingsEditView extends StatelessWidget{
                         sh.setSettingName(setting, value);
                       },
                 ),
-                  //Text(sh.getSettingName(setting)),
                 actions: <Widget>[
                   MaterialButton(
                     child: Text("Save"),
                     shape: StadiumBorder(),
-                    //color: Colors.red,
                     textTheme: ButtonTextTheme.primary,
                     onPressed: (){
                       _saveSetting().then((value) => {_exit(context)});
@@ -115,23 +101,7 @@ class CallSettingsEditView extends StatelessWidget{
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-
-                        Center (child: //Image.file(File(sh.getPicLocation(setting)))
-                          CircularProfileAvatar(
-                            sh.getPicLocation(setting),
-                                radius: 70,
-                                backgroundColor: Colors.green,
-                                initialsText: Text(
-                                  sh.getCallerName(setting).substring(0, min(2, sh.getCallerName(setting).length)),
-                                  style: TextStyle(fontSize: 40, color: Colors.white),
-                                ),
-                                elevation: 5.0,
-                                onTap: () {
-                                  print(sh.getCallerName(setting));
-                                  _setProfilImage(setting);
-                                },
-                          ),
-                        ),
+                        imageField,
                       ],
                     ),
                   ),
@@ -154,12 +124,12 @@ class CallSettingsEditView extends StatelessWidget{
                             ),
                             onSubmitted: (String value) async {
                               sh.setCallerName(setting, value);
+                              imageField.updateCallerName(value);
                             },
                         )
                       ),
                   ),
-                  
-
+        
                   audioPathField,
                   
                 ],
@@ -180,15 +150,103 @@ class CallSettingsEditView extends StatelessWidget{
                   },
               ),
             );
-            //TODO delete button   
       } 
       );
-
-  
   }
-  
-
 }
+
+
+class ImageField extends StatefulWidget {
+
+  String path;
+  String callerName;
+
+  ImageFieldState state;
+
+  ImageField(String path, String callerName) {
+    this.path = path;
+    this.callerName = callerName;
+  }
+
+  updateCallerName(String callerName) {
+    state._updateCallerName(callerName);
+  }
+
+  @override
+  State<ImageField> createState() => state = ImageFieldState(this, this.path, this.callerName);
+  
+} 
+
+class ImageFieldState extends State<ImageField> {
+
+  ImageField field;
+  String path;
+  String callerName;
+
+  ImageFieldState(ImageField imageField, String path, String callerName) {
+    this.field = imageField;
+    this.path = path;
+    this.callerName = callerName;
+  }
+
+  _updateCallerName(String callerName) {
+    this.setState(() {
+        this.callerName = callerName;
+    });
+    field.callerName = callerName;
+  }
+
+
+  _saveImagePath(String path) {
+    this.setState(() {
+        this.path = path;
+    });
+    field.path = path;
+  }
+
+  _setImage() {
+    Future<String> path = FilePicker.getFilePath(type: FileType.IMAGE);
+       path.then((value) => _saveImagePath(value));
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(top: 20.0),
+        child: new Stack(fit: StackFit.loose, children: <Widget>[
+          new Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ProfileImage(this.path, this.callerName, 1)
+            ],
+          ),
+          Padding(
+              padding: EdgeInsets.only(top: 110.0, left: 120.0),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new CircleAvatar(
+                    backgroundColor: Colors.red,
+                    radius: 25.0,
+                    child: new IconButton(
+                      icon: Icon(Icons.camera_alt),
+                      color: Colors.white,
+                      onPressed: () {_setImage();},
+                    ),
+                  )
+                ],
+              )),
+        ]),
+      );
+  }
+}
+
+
+
+
+
 
 class AudioPathField extends StatefulWidget{
 
@@ -242,5 +300,4 @@ class AudioPathFieldState extends State<AudioPathField> {
           ),
       );
   }
-
 }

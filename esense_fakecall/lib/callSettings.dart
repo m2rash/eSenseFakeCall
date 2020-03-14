@@ -1,11 +1,9 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
-import 'package:eSenseFC/homescreen.dart';
-import 'package:eSenseFC/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'callSettingsEdit.dart';
 import 'musicPlayer.dart';
+import 'profileImage.dart';
 import 'storage.dart';
 
 class CallSettingsView extends StatelessWidget {
@@ -30,6 +28,7 @@ class CallSettingsView extends StatelessWidget {
               return Center(child: Text('Error!!!!!'));
             }
           List<String> setting = snapshot.data ?? [];
+          
           return Scaffold(
             // backgroundColor: Colors.deepOrange,
             appBar: AppBar(
@@ -60,21 +59,8 @@ class CallSettingsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Center (child: 
-                        CircularProfileAvatar(
-                          sh.getPicLocation(setting),
-                              radius: 70,
-                              backgroundColor: Colors.green,
-                              initialsText: Text(
-                                sh.getCallerName(setting).substring(0, 2),
-                                style: TextStyle(fontSize: 40, color: Colors.white),
-                              ),
-                              elevation: 5.0,
-                              onTap: () {
-                                print(sh.getCallerName(setting));
-                              },
-                        ),
+                        ProfileImage(sh.getPicLocation(setting), sh.getCallerName(setting), 1),
                       ),
                     ],
                   ),

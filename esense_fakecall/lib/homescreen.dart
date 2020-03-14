@@ -1,5 +1,5 @@
-//import 'package: circular_profile_avatar/'
 import 'package:eSenseFC/callSettings.dart';
+import 'package:eSenseFC/profileImage.dart';
 import 'package:eSenseFC/storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +24,6 @@ class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     print('new HomeBuild');
-    
-    print('start building');
     return Scaffold(
       
       body: FutureBuilder(
@@ -43,6 +41,7 @@ class HomeViewState extends State<HomeView> {
             return ListView.builder( 
               itemCount: settings.length,
               itemBuilder: (context, index) {
+                  print(settings[index]);
                   return Card (
                       elevation: 6.0,
                       margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
@@ -52,10 +51,10 @@ class HomeViewState extends State<HomeView> {
 
                       child: ListTile(
                             leading: Container(
-                                width: 40,
+                                width: 50,
+                                height: 50,
                                 alignment: Alignment.center,
-                                  //TODO Bilder
-                                child: Icon(Icons.play_circle_filled, size: 27,),
+                                child: ProfileImage(sh.getPicLocation(settings[index]), sh.getCallerName(settings[index]), 0),
                               ),
                             title: Text(sh.getSettingName(settings[index])),
                             subtitle: Text("Subtitle"),
@@ -67,7 +66,6 @@ class HomeViewState extends State<HomeView> {
                                       );
                                     }
                       ),
-
                 );
                 },
       
