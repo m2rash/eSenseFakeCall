@@ -84,7 +84,12 @@ class OverviewPopUp extends StatelessWidget{
   }
 
   _play() {
-    //TODO
+    sh.getSetting(index).then((value) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(value))),
+      )
+    );
   }
 
   _edit(int index) {
@@ -95,7 +100,7 @@ class OverviewPopUp extends StatelessWidget{
   }
 
   _delete() {
-    //TODO
+    sh.deleteSetting(index);
   }
 
   void choiceAction(String choice){
