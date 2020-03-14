@@ -98,15 +98,15 @@ class StorageHandler {
     return false;
   }
 
-  deleteSetting(int index) async {
+  Future<bool> deleteSetting(int index) async {
     await initHandler();
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     await prefs.remove(keyList[index]);
     await prefs.remove(keyListId);
-    keyList.remove(keyList[index]);
+    keyList.removeWhere((item) => item == keyList[index]); //removes also duplicates
     print('new keyLength> ' + keyList.length.toString());
-    prefs.setStringList(keyListId, keyList);
+    return prefs.setStringList(keyListId, keyList);
   }
 
 

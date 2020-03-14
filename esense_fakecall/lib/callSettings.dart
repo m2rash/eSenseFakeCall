@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'callSettingsEdit.dart';
+import 'musicPlayer.dart';
 import 'storage.dart';
 
 class CallSettingsView extends StatelessWidget {
@@ -33,6 +34,9 @@ class CallSettingsView extends StatelessWidget {
             // backgroundColor: Colors.deepOrange,
             appBar: AppBar(
               title: Text(sh.getSettingName(setting)),
+              actions: <Widget>[
+                  CallSettingPopUp(this.sh, this.settingIndex),
+              ],
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
@@ -86,10 +90,7 @@ class CallSettingsView extends StatelessWidget {
                         child: Icon(Icons.person, size: 27,),
                       ),
                       title: Text('Caller Name', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
-                      subtitle: Text(sh.getCallerName(setting), style: TextStyle(fontSize: 19.0),),
-                      onTap: () {sh.setCallerName(setting, 'test');  //TODO Test
-                                    
-                                    print(sh.getCallerName(setting));},
+                      subtitle: Text(sh.getCallerName(setting), style: TextStyle(fontSize: 19.0),),        
                     ),
                 ),
                 
@@ -123,9 +124,87 @@ class CallSettingsView extends StatelessWidget {
                 },
             ),
           );
-          //TODO delete button   
     } 
     ); 
+  }
+}
+
+
+
+
+
+
+class CallSettingPopUp extends StatelessWidget{
+
+  StorageHandler sh;
+  int index;
+  BuildContext context;
+
+  CallSettingPopUp(StorageHandler sh, int index) {
+    this.sh = sh;
+    this.index = index;
+  }
+
+  _play() {
+    sh.getSetting(index).then((value) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(value))),
+      )
+    );
+  }
+
+  _edit(int index) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CallSettingsEditView(index)),
+    );
+  }
+
+  _delete() {
+    sh.deleteSetting(index).then((value) => Navigator.pop(context));
+  }
+
+  void choiceAction(String choice){
+      if(choice == 'Play'){
+        this._play();
+      }else if(choice == 'Edit'){
+        this._edit(index);
+      }else if(choice == 'Delete'){
+        this._delete();
+      }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return PopupMenuButton<String>(
+        onSelected: choiceAction,
+        itemBuilder: (BuildContext context) => [
+          PopupMenuItem(
+                  value: 'Play',
+                  child: ListTile(
+                    leading: Icon(Icons.play_arrow),
+                    title: Text('Play'),
+                  )
+          ),
+          PopupMenuItem(
+                  value: 'Edit',
+                  child: ListTile(
+                    leading: Icon(Icons.edit),
+                    title: Text('Edit'),
+                  )
+          ),
+          PopupMenuItem(
+                  value: 'Delete',
+                  child: ListTile(
+                    leading: Icon(Icons.delete_forever),
+                    title: Text('Delete'),
+                  )
+          ),
+        ]
+    );
   }
 }
 

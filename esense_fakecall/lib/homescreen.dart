@@ -7,10 +7,19 @@ import 'package:flutter/material.dart';
 import 'musicPlayer.dart';
 import 'callSettingsEdit.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => HomeViewState();
+}
+
+
+
+class HomeViewState extends State<HomeView> {
 
   StorageHandler sh = new StorageHandler();
 
+
+  _updateHomeView() => this.setState(() {this.sh = new StorageHandler();});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +59,7 @@ class HomeView extends StatelessWidget {
                               ),
                             title: Text(sh.getSettingName(settings[index])),
                             subtitle: Text("Subtitle"),
-                            trailing: OverviewPopUp(this.sh, index),
+                            trailing: OverviewPopUp(this, this.sh, index),
                             onTap: (){Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => CallSettingsView(index),
@@ -74,11 +83,13 @@ class HomeView extends StatelessWidget {
 
 class OverviewPopUp extends StatelessWidget{
 
+  HomeViewState homeViewState;
   StorageHandler sh;
   int index;
   BuildContext context;
 
-  OverviewPopUp(StorageHandler sh, int index) {
+  OverviewPopUp(HomeViewState homeViewState, StorageHandler sh, int index) {
+    this.homeViewState = homeViewState;
     this.sh = sh;
     this.index = index;
   }
@@ -100,7 +111,7 @@ class OverviewPopUp extends StatelessWidget{
   }
 
   _delete() {
-    sh.deleteSetting(index);
+    sh.deleteSetting(index).then((value) => homeViewState._updateHomeView());
   }
 
   void choiceAction(String choice){
