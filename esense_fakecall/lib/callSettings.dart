@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'callSettingsEdit.dart';
-import 'inCall.dart';
+import 'incomingCall.dart';
 import 'profileImage.dart';
 import 'storage.dart';
 
@@ -135,7 +135,7 @@ class CallSettingPopUp extends StatelessWidget{
     sh.getSetting(index).then((value) =>
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => InCallView(value)),
+        MaterialPageRoute(builder: (context) => InComingCallView(value)),
       )
     );
   }
@@ -193,54 +193,3 @@ class CallSettingPopUp extends StatelessWidget{
     );
   }
 }
-
-/*final Color color1 = Color(0xffFC5CF0);
-    final Color color2 = Color(0xffFE8852);
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(sh.getSettingName(setting)),
-      ),
-      body: Cusrto
-      Container(
-        child: 
-          Column(
-            children: [
-              Container(
-                height: 200,
-
-                child: Center (child: CircularProfileAvatar(
-                      'https://avatars0.githubusercontent.com/u/8264639?s=460&v=4',
-                          radius: 80,
-                          backgroundColor: Colors.green,
-                          initialsText: Text(
-                            "AD",
-                            style: TextStyle(fontSize: 40, color: Colors.white),
-                          ),
-                          elevation: 5.0,
-                          onTap: () {
-                            print('adil');
-                          },
-                          ),),
-              ),
-
-              Container (
-                margin: new EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-                  height: 100,
-                  child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: sh.getCallerName(setting),
-                      ),
-                      onSubmitted: (String value) async {
-                        sh.callList[setting]['callerName'] = value;
-                        print('new Name:' + sh.callList[setting]['callerName']);
-                      },
-                  ),
-              )
-            ],
-          ),
-          
-      ),
-    );*/

@@ -50,11 +50,6 @@ class InCallView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
     playFakeMessage(audioPath);
     return Scaffold(
 //TODO Incall Look
@@ -189,26 +184,10 @@ class InCallView extends StatelessWidget {
               onPressed: (){
                 stopCall(); 
                 Navigator.pop(context);
+                if (Navigator.canPop(context)) {Navigator.pop(context);}
               },
             ),
         )
-        
-        
-        
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-        //   children: <Widget>[
-            
-        //     MaterialButton(
-        //       height: 65,
-        //       child: Icon(Icons.call_end),
-        //       color: Colors.red,
-        //       shape: CircleBorder(),
-        //       onPressed: (){},
-        //     )
-        //   ],
-        // ),
       );
   }
 

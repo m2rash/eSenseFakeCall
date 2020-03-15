@@ -1,9 +1,9 @@
-import 'package:eSenseFC/inCall.dart';
 import 'package:eSenseFC/profileImage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'incomingCall.dart';
 import 'storage.dart';
 
 
@@ -144,7 +144,7 @@ class CallSettingsEditView extends StatelessWidget{
                     print('Path: ' + audioPathField.path);
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => InCallView(this.setting),
+                        MaterialPageRoute(builder: (context) => InComingCallView(this.setting),
                         )
                       );
                   },

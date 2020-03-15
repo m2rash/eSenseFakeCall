@@ -4,8 +4,8 @@ import 'package:eSenseFC/storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'inCall.dart';
 import 'callSettingsEdit.dart';
+import 'incomingCall.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -96,7 +96,7 @@ class OverviewPopUp extends StatelessWidget{
     sh.getSetting(index).then((value) =>
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => InCallView(value)),
+        MaterialPageRoute(builder: (context) => InComingCallView(value)),
       )
     );
   }
