@@ -18,7 +18,7 @@ class InComingCallView extends StatelessWidget {
   List<String> setting;
   String callerName;
   String imagePath;
-  String audioPath;
+  Future<String> audioPath;
   final player = AudioPlayer();
 
 
@@ -28,7 +28,7 @@ class InComingCallView extends StatelessWidget {
     this.setting = setting;
     this.callerName = sh.getCallerName(setting);
     this.imagePath = sh.getPicLocation(setting);
-    this.audioPath = sh.getAudioLocation(setting);
+    this.audioPath = sh.getRingTone();
   }
   
 
@@ -58,7 +58,7 @@ class InComingCallView extends StatelessWidget {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
-    playFakeMessage(audioPath);
+    this.audioPath.then((value) => playFakeMessage(value));
     return Scaffold(
         backgroundColor: Colors.grey[800],
       

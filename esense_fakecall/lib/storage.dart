@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class StorageHandler {
 
   String keyListId = 'keylist5';
+  String ringToneId = 'RingTone';
   String exampleSetting = '__fakeCallSampleSetting__';
   List<String> keyList;
 
@@ -86,6 +87,7 @@ class StorageHandler {
       if (getSettingName(settings[index]) != getSettingName(newSetting)) {
         
         //TODO Check duplicate and exampleName
+        //TODO Fehlschlag abfangen
 
         //set new SettingName
         this.keyList[index] = getSettingName(newSetting);
@@ -170,6 +172,29 @@ class StorageHandler {
     if (path != null) {
       setting[3] = path;
     }
+  }
+
+
+
+
+  //----------------------------------------------------------------------------------------------------//  
+  //                                             Ring                                                   //
+  //----------------------------------------------------------------------------------------------------//  
+
+
+
+  Future<String> getRingTone() async {
+    await initHandler();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.getString(this.ringToneId);
+  }
+
+  Future<bool> setRingTone(String ringTonePath) async {
+    await initHandler();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.setString(this.ringToneId, ringTonePath);
   }
 
 }
