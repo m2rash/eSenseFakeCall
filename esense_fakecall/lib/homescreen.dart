@@ -4,7 +4,7 @@ import 'package:eSenseFC/storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'musicPlayer.dart';
+import 'inCall.dart';
 import 'callSettingsEdit.dart';
 
 class HomeView extends StatefulWidget {
@@ -96,7 +96,7 @@ class OverviewPopUp extends StatelessWidget{
     sh.getSetting(index).then((value) =>
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(value))),
+        MaterialPageRoute(builder: (context) => InCallView(value)),
       )
     );
   }

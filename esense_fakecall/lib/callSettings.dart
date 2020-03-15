@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'callSettingsEdit.dart';
-import 'musicPlayer.dart';
+import 'inCall.dart';
 import 'profileImage.dart';
 import 'storage.dart';
 
@@ -135,7 +135,7 @@ class CallSettingPopUp extends StatelessWidget{
     sh.getSetting(index).then((value) =>
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => InCallView(sh.getAudioLocation(value))),
+        MaterialPageRoute(builder: (context) => InCallView(value)),
       )
     );
   }
