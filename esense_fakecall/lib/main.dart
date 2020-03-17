@@ -1,6 +1,5 @@
 import 'package:eSenseFC/callSettingsEdit.dart';
 import 'package:eSenseFC/generalSettings.dart';
-import 'package:eSenseFC/gyroTest.dart';
 import 'package:eSenseFC/homescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -46,8 +45,8 @@ class _OverviewState extends State<Overview>{
     final _kTabPages = <Widget>[
       //InCallView(),
       HomeView(),
-      GeneralSettingsView(),
-      // ESenseTest(),
+      // GeneralSettingsView(),
+      EsenseTest(),
       //Center(child: Icon(Icons.alarm, size: 64.0, color: Colors.cyan)),
     ];
 

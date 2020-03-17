@@ -5,13 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:esense_flutter/esense.dart';
 
 
-
-class ESenseTest extends StatefulWidget {
+class EsenseTest extends StatefulWidget {
   @override
-  _ESenseTestState createState() => _ESenseTestState();
+  _EsenseTestState createState() => _EsenseTestState();
 }
 
-class _ESenseTestState extends State<ESenseTest> {
+class _EsenseTestState extends State<EsenseTest> {
   String _deviceName = 'Unknown';
   double _voltage = -1;
   String _deviceStatus = '';
@@ -139,9 +138,7 @@ class _ESenseTestState extends State<ESenseTest> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Align(
-          alignment: Alignment.topLeft,
-          child: ListView(
+        body: ListView(
             children: [
               Text('eSense Device Status: \t$_deviceStatus'),
               Text('eSense Device Name: \t$_deviceName'),
@@ -151,7 +148,7 @@ class _ESenseTestState extends State<ESenseTest> {
               Text('$_event'),
             ],
           ),
-        ),
+        
         floatingActionButton: new FloatingActionButton(
           // a floating button that starts/stops listening to sensor events.
           // is disabled until we're connected to the device.
@@ -160,6 +157,6 @@ class _ESenseTestState extends State<ESenseTest> {
           tooltip: 'Listen to eSense sensors',
           child: (!sampling) ? Icon(Icons.play_arrow) : Icon(Icons.pause),
         ),
-      );
+    );
   }
 }
