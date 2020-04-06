@@ -1,5 +1,6 @@
 
 
+import 'package:eSenseFC/gyroTest.dart';
 import 'package:eSenseFC/storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,12 +57,14 @@ class GeneralSettingsView extends StatelessWidget {
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, textBaseline: TextBaseline.alphabetic),
                     ),
                   ),
+
                   
                   SizedBox(height: 10,)
               ],
             )
 
         ),
+        // EsenseTest(),
       ],
     );
   }

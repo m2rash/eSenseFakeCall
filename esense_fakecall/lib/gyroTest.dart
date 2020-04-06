@@ -1,7 +1,10 @@
+import 'package:eSenseFC/incomingCall.dart';
+import 'package:eSenseFC/storage.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'incomingCall.dart';
 import 'package:esense_flutter/esense.dart';
 
 
@@ -79,6 +82,12 @@ class _EsenseTestState extends State<EsenseTest> {
             break;
           case ButtonEventChanged:
             _button = (event as ButtonEventChanged).pressed ? 'pressed' : 'not pressed';
+            // print('pressed!!!!!!!!!!!!!!!!!!');
+            // StorageHandler().getSetting(0).then((value) => Navigator.push(
+            //                             context,
+            //                             MaterialPageRoute(builder: (context) => InComingCallView(value),
+            //                             )
+            //                           ));
             break;
           case AccelerometerOffsetRead:
             // TODO
