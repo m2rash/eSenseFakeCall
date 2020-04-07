@@ -101,7 +101,7 @@ class RingTonePathFieldState extends State<RingTonePathField> {
   }
 
   _setRingToneFile() {
-    Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
+    Future<String> path = FilePicker.getFilePath(type: FileType.audio);
        path.then((value) => _setRingToneFilePath(value));
   }
 

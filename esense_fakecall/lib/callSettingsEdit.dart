@@ -205,7 +205,7 @@ class ImageFieldState extends State<ImageField> {
   }
 
   _setImage() {
-    Future<String> path = FilePicker.getFilePath(type: FileType.IMAGE);
+    Future<String> path = FilePicker.getFilePath(type: FileType.image);
        path.then((value) => _saveImagePath(value));
   }
 
@@ -279,7 +279,7 @@ class AudioPathFieldState extends State<AudioPathField> {
   }
 
   _setAudioFile() {
-    Future<String> path = FilePicker.getFilePath(type: FileType.AUDIO);
+    Future<String> path = FilePicker.getFilePath(type: FileType.audio);
        path.then((value) => _saveAudioFilePath(value));
   }
 
