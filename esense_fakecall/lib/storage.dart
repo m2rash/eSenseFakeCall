@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +54,13 @@ class StorageHandler {
     }
     
     return prefs.getStringList(keyList[index]);
+  }
+
+  Future<List<String>> getRandomSetting() async {
+    await initHandler();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.getStringList(keyList[new Random().nextInt(keyList.length)]);
   }
 
 

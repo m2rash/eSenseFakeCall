@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:eSenseFC/storage.dart';
@@ -136,7 +135,11 @@ class InComingCallView extends StatelessWidget {
               shape: CircleBorder(),
               onPressed: (){
                 stopCall(); 
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                // for TestCalls
+                if (Navigator.canPop(context)) {Navigator.pop(context);} 
+                // for real FakeCalls
+                //else {player.stop().then((val) {SystemChannels.platform.invokeMethod('SystemNavigator.pop');});}
               },
             ),
           ],
