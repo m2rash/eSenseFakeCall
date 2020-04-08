@@ -1,23 +1,28 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHandler {
 
-  String keyListId = 'keylist5';
+  String keyListId = 'keylist8';
   String ringToneId = 'RingTone';
   String exampleSetting = '__fakeCallSampleSetting__';
   List<String> keyList;
+
+  var possibleColors = [Colors.blue, Colors.brown, Colors.green, Colors.red, Colors.purple, Colors.orange, Colors.orange];
+
 
   Future<bool> initHandler() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     this.keyList = prefs.getStringList(keyListId) ?? [];
     //print('got keyList' + keyList[0]);
-
+    prefs.setStringList(exampleSetting, ['settingsName', 'callerName', '', '', '1']);
     return true;
   }
 
+  
 
 
 
@@ -44,7 +49,7 @@ class StorageHandler {
 
 
   ///Returns a StringList with all information about a fakeCall.
-  ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, activ?]
+  ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, color]
   Future<List<String>> getSetting(int index) async {
     await initHandler();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,7 +82,7 @@ class StorageHandler {
 
 
   ///Stores a StringList with all information about a fakeCall.
-  ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, activ?]
+  ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, color]
   ///returns true for success and false if the new one is a duplicate
   Future<bool> storeSetting(List<String> newSetting, int index) async {
     await initHandler();
@@ -152,33 +157,43 @@ class StorageHandler {
     return setting[3];
   }
 
-  bool isSettingActive(List<String> setting) {
-    return setting[4] == 'true';
+  Color getColor(List<String> setting) {
+    int index = int.parse(setting[4]);
+    return possibleColors[index];
   }
 
 
 
-  setSettingName(List<String> setting, String newSettingName) async {
+  setSettingName(List<String> setting, String newSettingName) {
     if (newSettingName != null) {
       setting[0] = newSettingName;
     }
   }
 
-  setCallerName(List<String> setting, String newCallerName) async {
+  setCallerName(List<String> setting, String newCallerName) {
     if (newCallerName != null) {
       setting[1] = newCallerName;
+
+      _setColor(setting, newCallerName);
     }
   }
 
-  setImageLocation(List<String> setting, String path) async{
+  setImageLocation(List<String> setting, String path) {
     if (path != null) {
       setting[2] = path;
     }
   }
   
-  setAudioPath(List<String> setting, String path) async{
+  setAudioPath(List<String> setting, String path) {
     if (path != null) {
       setting[3] = path;
+    }
+  }
+
+  _setColor(List<String> setting, String callerName) {
+    if (callerName != null) {
+      setting[4] = new Random(callerName.hashCode).nextInt(possibleColors.length).toString();
+      // print(setting[4]);
     }
   }
 

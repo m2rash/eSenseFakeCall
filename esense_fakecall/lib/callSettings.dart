@@ -60,7 +60,7 @@ class CallSettingsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Center (child: 
-                        ProfileImage(sh.getPicLocation(setting), sh.getCallerName(setting), 1),
+                        ProfileImage(sh.getPicLocation(setting), sh.getCallerName(setting), sh.getColor(setting), 1),
                       ),
                     ],
                   ),
@@ -75,7 +75,7 @@ class CallSettingsView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Icon(Icons.person, size: 27,),
                       ),
-                      title: Text('Caller Name', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
+                      title: Text('Caller Name', style: TextStyle(color: sh.getColor(setting), fontSize: 12.0),),
                       subtitle: Text(sh.getCallerName(setting), style: TextStyle(fontSize: 19.0),),        
                     ),
                 ),
@@ -89,7 +89,7 @@ class CallSettingsView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Icon(Icons.play_circle_filled, size: 27,),
                       ),
-                      title: Text('Audio File', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
+                      title: Text('Audio File', style: TextStyle(color: sh.getColor(setting), fontSize: 12.0),),
                       subtitle: Text(sh.getAudioLocation(setting), style: TextStyle(fontSize: 19.0),),
                     ),
                 ),
@@ -100,7 +100,8 @@ class CallSettingsView extends StatelessWidget {
 
 
             floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.edit),
+                child: Icon(Icons.edit, color: Colors.white,),
+                backgroundColor: sh.getColor(setting),
                 onPressed: () async {
                   Navigator.push(
                         context,

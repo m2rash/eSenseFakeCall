@@ -12,6 +12,7 @@ class CallSettingsEditView extends StatelessWidget{
   StorageHandler sh = new StorageHandler();
   int settingIndex;
   List<String> setting;
+  FloatingButton floatingButton;
   AudioPathField audioPathField;
   ImageField imageField;
 
@@ -47,8 +48,9 @@ class CallSettingsEditView extends StatelessWidget{
                 return Center(child: Text('Error!!!!!'));
               }
             this.setting = snapshot.data ?? [];
-            this.audioPathField = AudioPathField(sh.getAudioLocation(setting));
-            this.imageField = ImageField(sh.getPicLocation(setting), sh.getCallerName(setting));
+            this.audioPathField = AudioPathField(sh.getAudioLocation(setting), sh.getColor(setting));
+            this.imageField = ImageField(sh.getPicLocation(setting), sh.getCallerName(setting), sh.getColor(setting));
+            this.floatingButton = FloatingButton(setting, this.audioPathField);
             print('EditView Setting: ' + setting.toString());
 
             return Scaffold(
@@ -63,6 +65,7 @@ class CallSettingsEditView extends StatelessWidget{
                       ),
                       onSubmitted: (String value) {
                         sh.setSettingName(setting, value);
+                        this.floatingButton._update(setting);
                       },
                 ),
                 actions: <Widget>[
@@ -124,7 +127,9 @@ class CallSettingsEditView extends StatelessWidget{
                             ),
                             onSubmitted: (String value) async {
                               sh.setCallerName(setting, value);
-                              imageField.updateCallerName(value);
+                              imageField.updateCallerName(value, sh.getColor(setting));
+                              audioPathField._updateColor(sh.getColor(setting));
+                              this.floatingButton._update(setting);
                             },
                         )
                       ),
@@ -137,18 +142,7 @@ class CallSettingsEditView extends StatelessWidget{
 
 
 
-              floatingActionButton: FloatingActionButton(
-                  child: Icon(Icons.play_arrow),
-                  onPressed: () async {
-                    sh.setAudioPath(setting, audioPathField.path);
-                    print('Path: ' + audioPathField.path);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => InComingCallView(this.setting),
-                        )
-                      );
-                  },
-              ),
+              floatingActionButton: floatingButton
             );
       } 
       );
@@ -156,24 +150,81 @@ class CallSettingsEditView extends StatelessWidget{
 }
 
 
+class FloatingButton extends StatefulWidget {
+
+  List<String> setting;
+  AudioPathField audioPathField;
+
+  FloatingButtonState fs;
+
+  FloatingButton(this.setting, this.audioPathField);
+
+  _update(List<String> setting) {
+    fs._update(setting);
+  }
+
+  @override
+  State<StatefulWidget> createState() => fs = FloatingButtonState(this.setting, this.audioPathField);
+  
+}
+
+class FloatingButtonState extends State<FloatingButton> {
+
+  List<String> setting;
+  StorageHandler sh = StorageHandler();
+  AudioPathField audioPathField;
+
+  FloatingButtonState(this.setting, this.audioPathField);
+
+  _update(List<String> setting) {
+      this.setState(() {
+        this.setting = setting;
+      });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+                backgroundColor: sh.getColor(setting),
+                  child: Icon(Icons.play_arrow),
+                  onPressed: () async {
+                    sh.setAudioPath(setting, audioPathField.path);
+                    // print('Path: ' + audioPathField.path);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => InComingCallView(this.setting),
+                        )
+                      );
+                  },
+              );
+  }
+  
+}
+
+
+
+
 class ImageField extends StatefulWidget {
 
   String path;
   String callerName;
+  Color color;
 
   ImageFieldState state;
 
-  ImageField(String path, String callerName) {
+  ImageField(String path, String callerName, Color color) {
     this.path = path;
     this.callerName = callerName;
+    this.color = color;
   }
 
-  updateCallerName(String callerName) {
-    state._updateCallerName(callerName);
+  updateCallerName(String callerName, Color color) {
+    state._updateCallerName(callerName, color);
   }
 
   @override
-  State<ImageField> createState() => state = ImageFieldState(this, this.path, this.callerName);
+  State<ImageField> createState() => state = ImageFieldState(this, this.path, this.callerName, this.color);
   
 } 
 
@@ -182,16 +233,19 @@ class ImageFieldState extends State<ImageField> {
   ImageField field;
   String path;
   String callerName;
+  Color color;
 
-  ImageFieldState(ImageField imageField, String path, String callerName) {
+  ImageFieldState(ImageField imageField, String path, String callerName, Color color) {
     this.field = imageField;
     this.path = path;
     this.callerName = callerName;
+    this.color = color;
   }
 
-  _updateCallerName(String callerName) {
+  _updateCallerName(String callerName, Color color) {
     this.setState(() {
         this.callerName = callerName;
+        this.color = color;
     });
     field.callerName = callerName;
   }
@@ -219,7 +273,7 @@ class ImageFieldState extends State<ImageField> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ProfileImage(this.path, this.callerName, 1)
+              ProfileImage(this.path, this.callerName, this.color, 1)
             ],
           ),
           Padding(
@@ -251,24 +305,33 @@ class ImageFieldState extends State<ImageField> {
 class AudioPathField extends StatefulWidget{
 
   String path;
+  Color color;
+  AudioPathFieldState as;
 
-  AudioPathField(String path) {
+  _updateColor(Color color) {
+    as._updateColor(color);
+  }
+
+  AudioPathField(String path, Color color) {
     this.path = path;
+    this.color = color;
   }
 
   @override
-  AudioPathFieldState createState() => AudioPathFieldState(path, this);
+  AudioPathFieldState createState() => as = AudioPathFieldState(path, this.color, this);
   
 }
 
 class AudioPathFieldState extends State<AudioPathField> {
 
   String path;
+  Color color;
   AudioPathField field;
 
-  AudioPathFieldState (String path, AudioPathField field) {
+  AudioPathFieldState (String path, Color color, AudioPathField field) {
       this.path = path;
       this.field = field;
+      this.color = color;
   }
 
   _saveAudioFilePath(String path) {
@@ -283,6 +346,10 @@ class AudioPathFieldState extends State<AudioPathField> {
        path.then((value) => _saveAudioFilePath(value));
   }
 
+  _updateColor(Color color) {
+      this.setState(() {this.color = color;});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -294,7 +361,8 @@ class AudioPathFieldState extends State<AudioPathField> {
               alignment: Alignment.center,
               child: Icon(Icons.play_circle_filled, size: 27,),
             ),
-            title: Text('Audio File', style: TextStyle(color: Colors.deepOrange, fontSize: 12.0),),
+            // TODO Farbe anpassen(dynamisch)
+            title: Text('Audio File', style: TextStyle(color: this.color, fontSize: 12.0),),
             subtitle: Text(path, style: TextStyle(fontSize: 19.0),),
             onTap: () {_setAudioFile();},
           ),

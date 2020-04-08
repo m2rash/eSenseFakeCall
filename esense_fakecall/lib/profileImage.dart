@@ -8,14 +8,16 @@ class ProfileImage extends StatelessWidget {
 
   String path;
   String callerName;
+  Color color;
   double fontsize;
 
   ///path: path to image
   ///callerName: Name of the caller (for default without image)
   ///size: needed for fontsize (0 is small, 1 big)
-  ProfileImage(String path, String callerName, int size) {
+  ProfileImage(String path, String callerName, Color color, int size) {
     this.path = path;
     this.callerName = callerName;
+    this.color = color;
     switch (size) {
       case 0:
         this.fontsize = 17;
@@ -65,10 +67,20 @@ class ProfileImage extends StatelessWidget {
 
   CircleAvatar loadNoImage() {
 
-    var possibleColors = [Colors.blue, Colors.brown, Colors.green, Colors.red, Colors.purple, Colors.orange, Colors.orange];
+    // var possibleColors = [Colors.blue, Colors.brown, Colors.green, Colors.red, Colors.purple, Colors.orange, Colors.orange];
 
+    //   return CircleAvatar(
+    //     backgroundColor: possibleColors[new Random(callerName.hashCode).nextInt(possibleColors.length)],
+    //     child: Text(callerName.substring(0, min(2, callerName.length)), 
+    //             style: TextStyle(
+    //               fontSize: this.fontsize,
+    //               fontWeight: FontWeight.bold,
+    //             ),
+    //     ),
+    //     radius: 80,
+    //   );
       return CircleAvatar(
-        backgroundColor: possibleColors[new Random(callerName.hashCode).nextInt(possibleColors.length)],
+        backgroundColor: this.color,
         child: Text(callerName.substring(0, min(2, callerName.length)), 
                 style: TextStyle(
                   fontSize: this.fontsize,

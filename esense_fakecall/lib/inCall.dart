@@ -17,6 +17,7 @@ class InCallView extends StatelessWidget {
   String callerName;
   String imagePath;
   String audioPath;
+  Color color;
   final player = AudioPlayer();
 
 
@@ -26,6 +27,7 @@ class InCallView extends StatelessWidget {
     this.callerName = sh.getCallerName(setting);
     this.imagePath = sh.getPicLocation(setting);
     this.audioPath = sh.getAudioLocation(setting);
+    this.color = sh.getColor(setting);
   }
   
 
@@ -77,7 +79,7 @@ class InCallView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ProfileImage(this.imagePath, this.callerName, 1),
+              ProfileImage(this.imagePath, this.callerName, this.color, 1),
               SizedBox(height: 15),
 
               CallTimeCounter(),

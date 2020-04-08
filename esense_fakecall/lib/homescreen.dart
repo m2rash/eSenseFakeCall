@@ -53,7 +53,7 @@ class HomeViewState extends State<HomeView> {
                                 width: 50,
                                 height: 50,
                                 alignment: Alignment.center,
-                                child: ProfileImage(sh.getPicLocation(settings[index]), sh.getCallerName(settings[index]), 0),
+                                child: ProfileImage(sh.getPicLocation(settings[index]), sh.getCallerName(settings[index]), sh.getColor(settings[index]), 0),
                               ),
                             title: Text(sh.getSettingName(settings[index])),
                             subtitle: Text("Subtitle"),
