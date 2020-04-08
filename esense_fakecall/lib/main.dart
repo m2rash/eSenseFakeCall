@@ -59,6 +59,7 @@ class Overview extends StatefulWidget {
 class _OverviewState extends State<Overview>{
 
   int _currentTabIndex = 0;
+  String title = 'Home';
   bool shouldCall = false;
   Overview ov;
   EsenseControler controler;
@@ -66,12 +67,23 @@ class _OverviewState extends State<Overview>{
   _OverviewState(Overview overview) {
     this.ov = overview;
     this.controler = new EsenseControler(ov);
-    // Overview.aktivSetting = ['NewSetting0', 'CallerName', '', '/storage/emulated/0/Download/Guardians of the Galaxy Klingelton.wav', 'true'];
   }
+
+
   
   _activateCall() {
     this.setState(() {this.shouldCall = true;});
   }
+
+  _switchTabIndex(int index) {
+    this.setState(() {
+      this._currentTabIndex = index;
+      if (index == 0) this.title = 'Home';
+      else if (index == 1) this.title = 'Settings';
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,72 +101,118 @@ class _OverviewState extends State<Overview>{
     }
 
     final _kTabPages = <Widget>[
-      //InCallView(),
       HomeView(),
       // MyApp1(),
       GeneralSettingsView(),
-      // EsenseTest(),
-      //Center(child: Icon(Icons.alarm, size: 64.0, color: Colors.cyan)),
     ];
 
 
-    Widget bottomNavbar = new BottomAppBar(
-        elevation: 0,
-        child: Container(
-          height: 50,
-          child: Row(
-            children: <Widget>[
-              SizedBox(width: 20.0),
-              IconButton(
-                color: Colors.grey.shade700,
-                icon: Icon(Icons.home, size: 30,), onPressed: (){setState(() {
-                  _currentTabIndex = 0;});
-                },
-              ),
-                
-              Spacer(),
-              IconButton(
-                color: Colors.grey.shade700,
-                icon: Icon(Icons.menu,size: 30,), onPressed: (){setState(() {
-                  _currentTabIndex = 1;});
-                },
-              ),
-              SizedBox(width: 20.0),
-            ],
-          ),
-        ),
-      );
+    
 
 
 
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('eSense Home'),
-        actions: <Widget>[
-          // TODO + Button designen
-            MaterialButton(
-              child: Icon(Icons.add),//Text("New Setting"),
-              shape: StadiumBorder(),
-              textTheme: ButtonTextTheme.primary,
-              onPressed: (){
-                new StorageHandler().createSettingForEdit().then((value) => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CallSettingsEditView(-1)))
-                        });
-              },
-            ),
-        ],
+        title: Text(title, style: TextStyle(color: Colors.black),),
+        actions: _currentTabIndex == 0 ? 
+                    <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+                        onPressed: (){
+                          new StorageHandler().createSettingForEdit().then((value) => {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => CallSettingsEditView(-1)))
+                                  });
+                        },
+                      ),
+                    ] 
+                  : [],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
 
       body: _kTabPages[_currentTabIndex],
 
-      bottomNavigationBar: bottomNavbar,
+      bottomNavigationBar: NavBar(this._switchTabIndex),
       
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ActivationButton(),
     );
   }
 }
+
+
+
+class NavBar extends StatefulWidget {
+
+  final void Function(int index) switchTab;
+
+  NavBar(this.switchTab);
+
+  @override
+  State<StatefulWidget> createState() => NavBarState(this.switchTab);
+  
+}
+
+class NavBarState extends State<NavBar> {
+
+  void Function(int index) switchTab;
+
+  NavBarState(this.switchTab);
+
+  Color activeColor = Colors.black;
+  Color inactiveColor = Colors.grey[400];
+  int currentIndex = 0;
+
+
+  _updateTab(int index) {
+    switchTab(index);
+    this.setState(() {this.currentIndex = index;});
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 56,
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                color: currentIndex == 0
+                      ? this.activeColor
+                      : this.inactiveColor,
+                icon: Icon(Icons.home, size: 30,),
+                padding: EdgeInsets.fromLTRB(20.0, 0, 0, 0), 
+                onPressed: (){
+                    if (currentIndex != 0) this._updateTab(0);
+                },
+              ),
+                
+              Spacer(),
+
+              IconButton(
+                color: currentIndex == 1
+                      ? this.activeColor
+                      : this.inactiveColor,
+                icon: Icon(Icons.settings,size: 30,), 
+                padding: EdgeInsets.fromLTRB(0, 0, 20.0, 0),
+                onPressed: (){
+                    if (currentIndex != 1) this._updateTab(1);
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+  }
+}
+
+
+
+
 
 
 class ActivationButton extends StatefulWidget {
@@ -196,5 +254,4 @@ class _ActivationButtonState extends State<ActivationButton> {
       );
     }
   }
-  
 }

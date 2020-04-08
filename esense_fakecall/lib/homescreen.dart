@@ -25,7 +25,6 @@ class HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     print('new HomeBuild');
     return Scaffold(
-      
       body: FutureBuilder(
           future: sh.getAllSettings(),
           builder: (context, snapshot) {
@@ -46,7 +45,7 @@ class HomeViewState extends State<HomeView> {
                       elevation: 6.0,
                       margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)
+                          borderRadius: BorderRadius.circular(10.0),
                       ),
 
                       child: ListTile(
