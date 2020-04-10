@@ -73,9 +73,9 @@ class CallSettingsView extends StatelessWidget {
                       leading: Container(
                         width: 40, // can be whatever value you want
                         alignment: Alignment.center,
-                        child: Icon(Icons.person, size: 27,),
+                        child: Icon(Icons.person, size: 27, color: Colors.black54),
                       ),
-                      title: Text('Caller Name', style: TextStyle(color: sh.getColor(setting), fontSize: 12.0),),
+                      title: Text('Caller Name', style: TextStyle(color: sh.getColor(setting), fontSize: 14.0, fontWeight: FontWeight.bold),),
                       subtitle: Text(sh.getCallerName(setting), style: TextStyle(fontSize: 19.0),),        
                     ),
                 ),
@@ -87,9 +87,9 @@ class CallSettingsView extends StatelessWidget {
                       leading: Container(
                         width: 40, // can be whatever value you want
                         alignment: Alignment.center,
-                        child: Icon(Icons.play_circle_filled, size: 27,),
+                        child: Icon(Icons.play_circle_filled, size: 27, color: Colors.black54),
                       ),
-                      title: Text('Audio File', style: TextStyle(color: sh.getColor(setting), fontSize: 12.0),),
+                      title: Text('Audio File', style: TextStyle(color: sh.getColor(setting), fontSize: 14.0, fontWeight: FontWeight.bold),),
                       subtitle: Text(sh.getAudioLocation(setting), style: TextStyle(fontSize: 19.0),),
                     ),
                 ),

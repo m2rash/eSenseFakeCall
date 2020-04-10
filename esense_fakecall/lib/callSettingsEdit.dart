@@ -124,6 +124,7 @@ class CallSettingsEditView extends StatelessWidget{
                             style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                             decoration: InputDecoration(
                                 hintText: sh.getCallerName(setting),
+                                suffixIcon: Icon(Icons.edit),
                             ),
                             onSubmitted: (String value) async {
                               sh.setCallerName(setting, value);
@@ -282,11 +283,11 @@ class ImageFieldState extends State<ImageField> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new CircleAvatar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.black87,
                     radius: 25.0,
                     child: new IconButton(
                       icon: Icon(Icons.camera_alt),
-                      color: Colors.white,
+                      //color: Colors.white,
                       onPressed: () {_setImage();},
                     ),
                   )
@@ -362,8 +363,9 @@ class AudioPathFieldState extends State<AudioPathField> {
               child: Icon(Icons.play_circle_filled, size: 27,),
             ),
             // TODO Farbe anpassen(dynamisch)
-            title: Text('Audio File', style: TextStyle(color: this.color, fontSize: 12.0),),
+            title: Text('Audio File', style: TextStyle(color: this.color, fontSize: 14.0, fontWeight: FontWeight.bold),),
             subtitle: Text(path, style: TextStyle(fontSize: 19.0),),
+            trailing: Icon(Icons.edit),
             onTap: () {_setAudioFile();},
           ),
       );
