@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:eSenseFC/callSettingsEdit.dart';
 import 'package:eSenseFC/generalSettings.dart';
@@ -223,21 +224,26 @@ class ActivationButton extends StatefulWidget {
 class _ActivationButtonState extends State<ActivationButton> {
 
   bool active = false;
+  StorageHandler sh = new StorageHandler();
 
   @override
   Widget build(BuildContext context) {
-
 
     if (!active) {
       return FloatingActionButton(
           child: Icon(Icons.play_arrow),
           backgroundColor: Colors.green,
           onPressed: (){
-            StorageHandler().getRandomSetting().then((value) {
-                setState(() {
-                  this.active = true;
-                  Overview.activateSetting(value);
-                });
+            sh.getRandomSetting().then((value) async {
+                bool audioPathVal = await File(sh.getAudioLocation(value)).exists();
+                if (!audioPathVal) {
+                  _showAlert(context, sh.getSettingName(value));
+                } else {
+                  setState(() {
+                    this.active = true;
+                    Overview.activateSetting(value);
+                  });
+                }
             });
           },
       );
@@ -253,5 +259,33 @@ class _ActivationButtonState extends State<ActivationButton> {
           },
       );
     }
+  }
+
+
+  _showAlert(BuildContext context, String settingName) {
+    String errorMessages = 'Invlaid AuioPath in Setting: "' + settingName + '"';
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+
+        return AlertDialog(
+          title: new Text("ERROR!!!"),
+          content: new Text(errorMessages),
+          actions: <Widget>[
+            MaterialButton(
+              child: Text("I understood"),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              color: Colors.red,
+              elevation: 3,
+              textTheme: ButtonTextTheme.primary,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
