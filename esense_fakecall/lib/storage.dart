@@ -12,7 +12,11 @@ class StorageHandler {
   String exampleSetting = '__fakeCallSampleSetting__';
   List<String> keyList;
 
-  var possibleColors = [Colors.blue, Colors.brown, Colors.green, Colors.red, Colors.purple, Colors.orange, Colors.orange];
+  var possibleColors = [Colors.green, Colors.lightGreen, 
+                        Colors.deepOrange, Colors.red, Colors.orange, Colors.lime,
+                        Colors.lightBlue, Colors.blue, 
+                        Colors.indigo, Colors.deepPurple, Colors.purple, Colors.pink,
+                        Colors.brown];
 
 
   Future<bool> initHandler() async {
