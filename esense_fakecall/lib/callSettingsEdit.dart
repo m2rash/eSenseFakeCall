@@ -48,15 +48,12 @@ class CallSettingsEditView extends StatelessWidget{
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: new Text("ERROR!!!"),
           content: new Text(errorMessages[errorCode]),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             MaterialButton(
               child: Text("I understood"),
-              //padding: EdgeInsets.fromLTRB(8.0, 8.0, 200.0, 8.0),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               color: sh.getColor(setting),
               elevation: 3,
@@ -301,7 +298,9 @@ class ImageFieldState extends State<ImageField> {
 
   _setImage() {
     Future<String> path = FilePicker.getFilePath(type: FileType.image);
-       path.then((value) => _saveImagePath(value));
+       path.then((value) {
+          value != null ? _saveImagePath(value) : _saveImagePath('');
+       } );
   }
 
 
@@ -384,7 +383,9 @@ class AudioPathFieldState extends State<AudioPathField> {
 
   _setAudioFile() {
     Future<String> path = FilePicker.getFilePath(type: FileType.audio);
-       path.then((value) => _saveAudioFilePath(value));
+      path.then((value) {
+        value != null ? _saveAudioFilePath(value) : {};     
+      });
   }
 
   _updateColor(Color color) {
