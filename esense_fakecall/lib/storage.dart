@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class StorageHandler {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     this.keyList = prefs.getStringList(keyListId) ?? [];
     //print('got keyList' + keyList[0]);
-    prefs.setStringList(exampleSetting, ['settingsName', 'callerName', '', '', '1']);
+    prefs.setStringList(exampleSetting, ['settingsName', 'callerName', '', '', '0']);
     return true;
   }
 
@@ -83,13 +84,22 @@ class StorageHandler {
 
   ///Stores a StringList with all information about a fakeCall.
   ///StringDef: [settingsName, callerName, PicLocaion, audioLocation, color]
-  ///returns true for success and false if the new one is a duplicate
-  Future<bool> storeSetting(List<String> newSetting, int index) async {
+  ///returns 0 for success or a number with error from checkSettingValid() or 100 for unknown Error
+  Future<int> storeSetting(List<String> newSetting, int index) async {
+    int error = 0;
     await initHandler();
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     List<List<String>> settings = await this.getAllSettings();
     print('saveSettingslength: ' + settings.length.toString());
+
+    //Error prevention
+    await this.checkSettingValid(newSetting, index).then((value) {
+        if (value != 0) error = value;
+    });
+    if (error != 0) return error;
+
+
 
     if (index == -1) {
       //Set new Index for new setting
@@ -99,7 +109,6 @@ class StorageHandler {
     } else {
       if (getSettingName(settings[index]) != getSettingName(newSetting)) {
         
-        //TODO Check duplicate and exampleName
         //TODO Fehlschlag abfangen
 
         //set new SettingName
@@ -110,7 +119,7 @@ class StorageHandler {
 
     await prefs.setStringList(getSettingName(newSetting), newSetting);
 
-    return false;
+    return 0;
   }
 
   Future<bool> deleteSetting(int index) async {
@@ -125,6 +134,29 @@ class StorageHandler {
   }
 
 
+  ///check if setting is valid
+  ///returns a number that indicates the errors:
+  ///0: valid
+  ///1: invalid SettingsName
+  ///2: invalid CallerName
+  ///3: invalid AudioPath
+  Future<int> checkSettingValid(List<String> setting, int index) async {
+    await initHandler();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if(this.getSettingName(setting) == this.exampleSetting) return 1;
+
+    if (this.keyList.contains(this.getSettingName(setting))) {
+      //is the containing key from the same setting?
+      if (this.getSettingName(setting) != this.keyList[index]) return 1;
+    }
+
+    bool audioPathVal = await File(this.getAudioLocation(setting)).exists();
+    if (!audioPathVal) return 3;
+
+
+    return 0;
+  }
 
 
 

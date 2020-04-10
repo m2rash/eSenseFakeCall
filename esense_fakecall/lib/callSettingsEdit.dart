@@ -22,15 +22,53 @@ class CallSettingsEditView extends StatelessWidget{
   }
 
 
-  Future<bool> _saveSetting() {
+  Future<int> _saveSetting(BuildContext context) async {
+    int error = 0;
+
     sh.setAudioPath(setting, audioPathField.path);
     sh.setImageLocation(setting, imageField.path);
-    return sh.storeSetting(setting, settingIndex);
+
+    return await sh.storeSetting(setting, settingIndex);
   }
 
-  _exit (BuildContext context) {
+
+  _exit(BuildContext context) {
     Navigator.pop(context);
     if (Navigator.canPop(context)) {Navigator.pop(context);}
+  }
+
+  //shows error message
+  _showAlert(BuildContext context, int errorCode) {
+
+    var errorMessages = ['', 
+                         'SettingName is not allowed!',
+                         'CallerName is not allowed!',
+                         'Invlaid AuioPath'];
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("ERROR!!!"),
+          content: new Text(errorMessages[errorCode]),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            MaterialButton(
+              child: Text("I understood"),
+              //padding: EdgeInsets.fromLTRB(8.0, 8.0, 200.0, 8.0),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              color: sh.getColor(setting),
+              elevation: 3,
+              textTheme: ButtonTextTheme.primary,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
 
@@ -74,7 +112,9 @@ class CallSettingsEditView extends StatelessWidget{
                     shape: StadiumBorder(),
                     textTheme: ButtonTextTheme.primary,
                     onPressed: (){
-                      _saveSetting().then((value) => {_exit(context)});
+                      _saveSetting(context).then((value) => {
+                        value == 0 ? _exit(context) : _showAlert(context, value)
+                      });
                     },
                 )
               ],
