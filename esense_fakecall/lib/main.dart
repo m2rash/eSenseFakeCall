@@ -104,7 +104,7 @@ class _OverviewState extends State<Overview>{
     final _kTabPages = <Widget>[
       HomeView(),
       // MyApp1(),
-      GeneralSettingsView(),
+      GeneralSettingsView(this.controler),
     ];
 
 
@@ -138,7 +138,7 @@ class _OverviewState extends State<Overview>{
       bottomNavigationBar: NavBar(this._switchTabIndex),
       
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ActivationButton(),
+      floatingActionButton: ActivationButton(this.controler),
     );
   }
 }
@@ -217,14 +217,23 @@ class NavBarState extends State<NavBar> {
 
 
 class ActivationButton extends StatefulWidget {
+
+  EsenseControler controler; 
+
+  ActivationButton(this.controler);
+
   @override
-  State<StatefulWidget> createState() => _ActivationButtonState();
+  State<StatefulWidget> createState() => _ActivationButtonState(this.controler);
 }
 
 class _ActivationButtonState extends State<ActivationButton> {
 
+  EsenseControler controler; 
+
   bool active = false;
   StorageHandler sh = new StorageHandler();
+
+  _ActivationButtonState(this.controler);
 
   @override
   Widget build(BuildContext context) {
@@ -236,11 +245,14 @@ class _ActivationButtonState extends State<ActivationButton> {
           onPressed: (){
             sh.getRandomSetting().then((value) async {
 
-                if (await sh.getRingTone() == null || !await File(await sh.getRingTone()).exists()) {
+                if (!controler.isConnected()) {
                   _showAlert(context, 0, sh.getSettingName(value));
                 }
-                else if (!await File(sh.getAudioLocation(value)).exists()) {
+                else if (await sh.getRingTone() == null || !await File(await sh.getRingTone()).exists()) {
                   _showAlert(context, 1, sh.getSettingName(value));
+                }
+                else if (!await File(sh.getAudioLocation(value)).exists()) {
+                  _showAlert(context, 2, sh.getSettingName(value));
                 } else {
                   setState(() {
                     this.active = true;
@@ -266,7 +278,9 @@ class _ActivationButtonState extends State<ActivationButton> {
 
 
   _showAlert(BuildContext context, int errorCode, String settingName) {
-    var errorMessages = ['Invalid RingTonePath','Invlaid AuioPath in Setting: "' + settingName + '"'];
+    var errorMessages = ['eSense not found', 
+                         'Invalid RingTonePath',  
+                         'Invlaid AuioPath in Setting: "' + settingName + '"'];
 
     showDialog(
       context: context,

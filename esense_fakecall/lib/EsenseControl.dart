@@ -22,6 +22,14 @@ class EsenseControler {
     this.overview = overview;
     _connectToESense();
   }
+
+  bool isConnected() {
+    return this._deviceStatus == 'connected';
+  }
+
+  String getDeviceStatus() {
+    return this._deviceStatus;
+  }
   
 
   Future<void> _connectToESense() async {
