@@ -141,14 +141,14 @@ class StorageHandler {
   ///2: invalid CallerName
   ///3: invalid AudioPath
   Future<int> checkSettingValid(List<String> setting, int index) async {
-    await initHandler();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await initHandler();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if(this.getSettingName(setting) == this.exampleSetting) return 1;
 
     if (this.keyList.contains(this.getSettingName(setting))) {
-      //is the containing key from the same setting?
-      if (this.getSettingName(setting) != this.keyList[index]) return 1;
+      //is the containing key from the same setting?  | if index == -1 => newSetting => it cant be the same setting
+      if (index == -1 || this.getSettingName(setting) != this.keyList[index]) return 1;
     }
 
     bool audioPathVal = await File(this.getAudioLocation(setting)).exists();
