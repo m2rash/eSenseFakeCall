@@ -235,9 +235,12 @@ class _ActivationButtonState extends State<ActivationButton> {
           backgroundColor: Colors.green,
           onPressed: (){
             sh.getRandomSetting().then((value) async {
-                bool audioPathVal = await File(sh.getAudioLocation(value)).exists();
-                if (!audioPathVal) {
-                  _showAlert(context, sh.getSettingName(value));
+
+                if (await sh.getRingTone() == null || !await File(await sh.getRingTone()).exists()) {
+                  _showAlert(context, 0, sh.getSettingName(value));
+                }
+                else if (!await File(sh.getAudioLocation(value)).exists()) {
+                  _showAlert(context, 1, sh.getSettingName(value));
                 } else {
                   setState(() {
                     this.active = true;
@@ -262,8 +265,8 @@ class _ActivationButtonState extends State<ActivationButton> {
   }
 
 
-  _showAlert(BuildContext context, String settingName) {
-    String errorMessages = 'Invlaid AuioPath in Setting: "' + settingName + '"';
+  _showAlert(BuildContext context, int errorCode, String settingName) {
+    var errorMessages = ['Invalid RingTonePath','Invlaid AuioPath in Setting: "' + settingName + '"'];
 
     showDialog(
       context: context,
@@ -271,7 +274,7 @@ class _ActivationButtonState extends State<ActivationButton> {
 
         return AlertDialog(
           title: new Text("ERROR!!!"),
-          content: new Text(errorMessages),
+          content: new Text(errorMessages[errorCode]),
           actions: <Widget>[
             MaterialButton(
               child: Text("I understood"),
