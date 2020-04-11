@@ -30,6 +30,12 @@ class EsenseControler {
   String getDeviceStatus() {
     return this._deviceStatus;
   }
+
+  double getBatteryStatus() {
+    return this._voltage;
+  }
+
+
   
 
   Future<void> _connectToESense() async {
@@ -128,18 +134,32 @@ class EsenseControler {
     Timer(Duration(seconds: 5), () async => await ESenseManager.getSensorConfig());
   }
 
-  StreamSubscription subscription;
-  void _startListenToSensorEvents() async {
-    // subscribe to sensor event from the eSense device
-    subscription = ESenseManager.sensorEvents.listen((event) {
-      print('SENSOR event: $event');
-        _event = event.toString();
-    });
-      sampling = true;
+  // StreamSubscription subscription;
+  // void _startListenToSensorEvents() async {
+  //   // subscribe to sensor event from the eSense device
+  //   subscription = ESenseManager.sensorEvents.listen((event) {
+  //     print('SENSOR event: $event');
+  //       _event = event.toString();
+  //   });
+  //     sampling = true;
+  // }
+
+  // void _pauseListenToSensorEvents() async {
+  //   subscription.cancel();
+  //     sampling = false;
+  // }
+
+
+  Stream<SensorEvent> events() {
+    return ESenseManager.sensorEvents;
   }
 
-  void _pauseListenToSensorEvents() async {
-    subscription.cancel();
-      sampling = false;
+  Stream<ESenseEvent> eSenseEvents() {
+    return ESenseManager.eSenseEvents;
   }
+
+  bool connnected() {
+    return ESenseManager.connected;
+  }
+  
 }
