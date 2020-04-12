@@ -123,15 +123,15 @@ class EsenseControler {
 
   void _getESenseProperties() async {
     // get the battery level every 10 secs
-    Timer.periodic(Duration(seconds: 10), (timer) async => await ESenseManager.getBatteryVoltage());
+    // Timer.periodic(Duration(seconds: 10), (timer) async => await ESenseManager.getBatteryVoltage());
 
-    // wait 2, 3, 4, 5, ... secs before getting the name, offset, etc.
-    // it seems like the eSense BTLE interface does NOT like to get called
-    // several times in a row -- hence, delays are added in the following calls
-    Timer(Duration(seconds: 2), () async => await ESenseManager.getDeviceName());
-    Timer(Duration(seconds: 3), () async => await ESenseManager.getAccelerometerOffset());
-    Timer(Duration(seconds: 4), () async => await ESenseManager.getAdvertisementAndConnectionInterval());
-    Timer(Duration(seconds: 5), () async => await ESenseManager.getSensorConfig());
+    // // wait 2, 3, 4, 5, ... secs before getting the name, offset, etc.
+    // // it seems like the eSense BTLE interface does NOT like to get called
+    // // several times in a row -- hence, delays are added in the following calls
+    // Timer(Duration(seconds: 2), () async => await ESenseManager.getDeviceName());
+    // Timer(Duration(seconds: 3), () async => await ESenseManager.getAccelerometerOffset());
+    // Timer(Duration(seconds: 4), () async => await ESenseManager.getAdvertisementAndConnectionInterval());
+    // Timer(Duration(seconds: 5), () async => await ESenseManager.getSensorConfig());
   }
 
   // StreamSubscription subscription;
@@ -161,5 +161,9 @@ class EsenseControler {
   bool connnected() {
     return ESenseManager.connected;
   }
-  
+
+  updateBatteryState() async {
+    await ESenseManager.getBatteryVoltage();
+  }
+
 }

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:eSenseFC/EsenseControl.dart';
+import 'package:eSenseFC/main.dart';
 import 'package:eSenseFC/storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +12,9 @@ import 'package:esense_flutter/esense.dart';
 class GeneralSettingsView extends StatelessWidget {
 
   EsenseControler controler;
+  final EsenseControler Function() updateESenseControler;
 
-  GeneralSettingsView(this.controler);
+  GeneralSettingsView(this.controler, this.updateESenseControler);
 
 
   @override
@@ -21,7 +24,7 @@ class GeneralSettingsView extends StatelessWidget {
 
         RingTonePathField(),
 
-        ESenseTest(this.controler),
+        ESenseTest(this.controler, this.updateESenseControler),
       ],
     );
   }
@@ -66,7 +69,7 @@ class RingTonePathFieldState extends State<RingTonePathField> {
   Widget build(BuildContext context) {
     sh.getRingTone().then((value) => this._setRingToneFilePath(value));
     return Card (
-        elevation: 6.0,
+        elevation: 3.0,
         margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0)
@@ -118,61 +121,97 @@ class RingTonePathFieldState extends State<RingTonePathField> {
 class ESenseTest extends StatefulWidget {
 
   EsenseControler controler;
+  final EsenseControler Function() updateESenseControler;
 
-  ESenseTest(this.controler);
+  ESenseTest(this.controler, this.updateESenseControler);
 
   @override
-  State<StatefulWidget> createState() => ESenseTestState(this.controler);
+  State<StatefulWidget> createState() => ESenseTestState(this.controler, this.updateESenseControler);
   
 }
 
 class ESenseTestState extends State<ESenseTest> {
 
   EsenseControler controler;
-  Icon _batteryIcon = Icon(Icons.battery_unknown,);
-  Icon _connectionIcon = Icon(Icons.bluetooth_searching);
+  final EsenseControler Function() updateESenseControler;
+  Timer t;
+  bool connected = false;
+  Icon _batteryIcon = Icon(Icons.battery_unknown, color: Colors.yellow[800],);
+  Icon _connectionIcon = Icon(Icons.bluetooth_searching, color: Colors.yellow[800],);
 
-  ESenseTestState(EsenseControler controler) {
+  ESenseTestState(EsenseControler controler, this.updateESenseControler) {
     this.controler = controler;
+    this.t = Timer.periodic(Duration(seconds: 2), (t) async => this._refreshConnectionState());
 
-    // refresh();
-    // getESenseProperties();
-    _listenToESenseEvents();
-    _listentoGyro();
-    // listenToButton();
+  }
+
+  _refreshConnectionState() {
+    print(controler.connnected().toString());
+    if (!connected) {
+      if (controler.connnected()) {
+        this._listenToESenseEvents();
+        controler.updateBatteryState();
+        this.setState(() {this.connected = true;});
+      }
+      this._setConnectionIcon(controler.getDeviceStatus());
+    } 
+    else {
+      if (!controler.connnected()) {
+        if (this._gyroSub != null) this._gyroSub.cancel();
+        if (this._batteryAndButtonSub != null) this._batteryAndButtonSub.cancel();
+        this.setState(() {this.connected = false;});
+        this._setConnectionIcon('disconnected');
+      } 
+      //normal state
+      else {
+        controler.updateBatteryState();
+      }
+    }
   }
 
 
-  String _buttonState = 'not pressed';
+  _setConnectionIcon(String state) {
+    if (state == 'connected') this.setState(() {this._connectionIcon = Icon(Icons.bluetooth_connected, color: Colors.green,);});
+    else if (state == 'unknown') this.setState(() {this._connectionIcon = Icon(Icons.bluetooth_searching, color: Colors.yellow[800],);});
+    else {
+      this.setState(() {
+        this._connectionIcon = Icon(Icons.bluetooth_disabled, color: Colors.red,);
+        this._batteryIcon = Icon(Icons.battery_unknown, color: Colors.yellow[800],);
+      });
+    }
+  }
+
+  _setBatteryIcon(double voltage) {
+    print('Battery Voltage: ' + voltage.toString());
+    if (voltage > 3) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.green,);});
+    else if (voltage > 2) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.yellow[800],);});
+    else this.setState(() {this._batteryIcon = Icon(Icons.battery_alert, color: Colors.red);});
+  }
+
+
+
+  String _buttonState = 'unknown';
   double _battery = -1;
 
   bool sampling = false;
 
   StreamSubscription _batteryAndButtonSub;
   StreamSubscription _gyroSub;
+  bool gyroRunning;
 
 
   String _event = '';
 
-  String acc_x;
-  String acc_y;
-  String acc_z;
+  String acc_x = '-';
+  String acc_y = '-';
+  String acc_z = '-';
 
-  String gyro_x;
-  String gyro_y;
-  String gyro_z;
+  String gyro_x = '-';
+  String gyro_y = '-';
+  String gyro_z = '-';
 
-  String timestamp;
-  String packageIndex;
-
-
-  _setConnectionIcon(String state) {
-    // TODO ConnectionIcon
-  }
-
-  _setBatteryIcon(double voltage) {
-    // TODO BatteryIcon
-  }
+  String timestamp = '-';
+  String packageIndex = '-';
 
 
   void _listentoGyro() async{
@@ -196,6 +235,7 @@ class ESenseTestState extends State<ESenseTest> {
         });
       });
       setState(() {
+        gyroRunning = true;
         sampling = true;
       });
 
@@ -212,7 +252,7 @@ class ESenseTestState extends State<ESenseTest> {
             this._setConnectionIcon(controler.getDeviceStatus());
             break;
           case ButtonEventChanged:
-            _buttonState = (event as ButtonEventChanged).pressed ? 'pressed' : 'not pressed';
+            this.setState(() {_buttonState = (event as ButtonEventChanged).pressed ? 'pressed' : 'not pressed';});
             
             break;
         }
@@ -222,14 +262,16 @@ class ESenseTestState extends State<ESenseTest> {
   void pauseGyro() async{
     _gyroSub.cancel();
     setState(() {
+      gyroRunning = false;
       sampling = false;
     });
   }
 
 
   void dispose() {
-    _gyroSub.cancel();
-    _batteryAndButtonSub.cancel();
+    if (this._gyroSub != null) this._gyroSub.cancel();
+    if (this._batteryAndButtonSub != null) this._batteryAndButtonSub.cancel();
+    t.cancel();
     super.dispose();
   }
 
@@ -239,7 +281,7 @@ class ESenseTestState extends State<ESenseTest> {
   @override
   Widget build(BuildContext context) {
     return  Card (
-            elevation: 6.0,
+            elevation: 3.0,
             margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)
@@ -388,6 +430,39 @@ class ESenseTestState extends State<ESenseTest> {
                         ],
                       )
                     ),
+
+
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(24, 10, 24, 20),
+                      child: connected == true ? 
+                                  ((_gyroSub == null || !gyroRunning) ? 
+                                      MaterialButton(
+                                        child: Text("Start GyroListener"),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                        color: Colors.black,
+                                        elevation: 3,
+                                        textTheme: ButtonTextTheme.primary,
+                                        onPressed: () {this._listentoGyro();}
+                                      ) :
+                                      MaterialButton(
+                                        child: Text("Pause GyroListener"),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                        color: Colors.black,
+                                        elevation: 3,
+                                        textTheme: ButtonTextTheme.primary,
+                                        onPressed: () {this.pauseGyro();}
+                                      )
+                                  ):
+
+                            MaterialButton(
+                              child: Text("Reconnect eSense"),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              color: Colors.black,
+                              elevation: 3,
+                              textTheme: ButtonTextTheme.primary,
+                              onPressed: () {this.updateESenseControler();}
+                            )
+                    )
                   ],
                 ),
 

@@ -70,7 +70,12 @@ class _OverviewState extends State<Overview>{
     this.controler = new EsenseControler(ov);
   }
 
-
+  EsenseControler updateESenseControler() {
+    print('update eSense');
+    this.setState(() {this.controler = new EsenseControler(ov);});
+    return this.controler;
+  }
+  
   
   _activateCall() {
     this.setState(() {this.shouldCall = true;});
@@ -103,8 +108,8 @@ class _OverviewState extends State<Overview>{
 
     final _kTabPages = <Widget>[
       HomeView(),
+      GeneralSettingsView(this.controler, this.updateESenseControler),
       // MyApp1(),
-      GeneralSettingsView(this.controler),
     ];
 
 
