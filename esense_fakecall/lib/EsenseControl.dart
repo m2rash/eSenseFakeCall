@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_appavailability/flutter_appavailability.dart';
 
+import 'package:device_apps/device_apps.dart';
 import 'main.dart';
 import 'package:esense_flutter/esense.dart';
 
@@ -92,16 +92,7 @@ class EsenseControler {
             print('!!!!!!!!!!!!!!');
 
             if (Overview.callAllowed) {
-              // Scaffold.of(context).hideCurrentSnackBar();
-              AppAvailability.launchApp('com.example.esense_fakecall').then((_) {
-                print("App ${'com.example.esense_fakecall'} launched!");
-              });
-              // .catchError((err) {
-              //   Scaffold.of(null).showSnackBar(SnackBar(
-              //       content: Text("App ${'com.example.esense_fakecall'} not found!")
-              //   ));
-              //   print(err);
-              // });
+              DeviceApps.openApp('com.example.esense_fakecall');
               overview.activateCall();
             }
             
