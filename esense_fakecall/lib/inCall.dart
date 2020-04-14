@@ -205,37 +205,45 @@ class CallTimeCounter extends StatefulWidget {
 
 class CallTimeCounterState extends State<CallTimeCounter> {
 
-  int min = 42;
-  int sec = 42;
-  // static CallTimeCounterState callTimer;
+  int min = 0;
+  int sec = 0;
+  Timer timer;
 
-  // CallTimeCounterState() {
-  //   min = 0;
-  //   sec = 0;
-  //   callTimer = this;
-  // }
+  CallTimeCounterState() {
+    min = 0;
+    sec = 0;
+    timer = Timer.periodic(Duration(seconds: 1), (timer) async => this._incrementCounter());
+  }
 
-  // static _incrementCounter() {
-  //   if (sec < 60) {
-  //     sec++;
-  //   } else {
-  //     min++;
-  //     sec = 0;
-  //   }
-  //   callTimer.setState(() {});
-  // }
+  _incrementCounter() {
+    if (sec < 59) {
+      sec++;
+    } else {
+      min++;
+      sec = 0;
+    }
+    this.setState(() {});
+  }
 
-  // Timer timer = Timer.periodic(Duration(seconds: 1), (timer) {_incrementCounter();});
+  String _makeTimelook(int digit) {
+    if(digit <10) return '0' + digit.toString();
+    return digit.toString();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     
     return Text(
-      min.toString() + ':' + sec.toString(),
+      _makeTimelook(min) + ':' + _makeTimelook(sec),
       style: TextStyle(color: Colors.white, fontSize: 15,),
     );
   }
   
 }
-
-//TODO IncomingCallView
