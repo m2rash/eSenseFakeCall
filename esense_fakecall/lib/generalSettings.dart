@@ -90,7 +90,7 @@ class RingTonePathFieldState extends State<RingTonePathField> {
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, textBaseline: TextBaseline.alphabetic),
                       ), 
                       
-                      Icon(Icons.play_arrow),
+                      // Icon(Icons.play_arrow),
                     ],
                   ),
                 ),

@@ -55,8 +55,8 @@ class HomeViewState extends State<HomeView> {
                                 alignment: Alignment.center,
                                 child: ProfileImage(sh.getPicLocation(settings[index]), sh.getCallerName(settings[index]), sh.getColor(settings[index]), 0),
                               ),
-                            title: Text(sh.getSettingName(settings[index])),
-                            subtitle: Text("Subtitle"),
+                            title: Text(sh.getSettingName(settings[index]), style: TextStyle(fontSize: 18,),),
+                            subtitle: Text(sh.getCallerName(settings[index])),
                             trailing: OverviewPopUp(this, this.sh, index),
                             onTap: (){Navigator.push(
                                         context,
@@ -126,27 +126,28 @@ class OverviewPopUp extends StatelessWidget{
   Widget build(BuildContext context) {
     this.context = context;
     return PopupMenuButton<String>(
+      icon: Icon(Icons.more_vert, color: Colors.black,),
         onSelected: choiceAction,
         itemBuilder: (BuildContext context) => [
           PopupMenuItem(
                   value: 'Play',
                   child: ListTile(
-                    leading: Icon(Icons.play_arrow),
-                    title: Text('Play'),
+                    leading: Icon(Icons.play_arrow, color: Colors.black),
+                    title: Text('Play', style: TextStyle(color: Colors.black)),
                   )
           ),
           PopupMenuItem(
                   value: 'Edit',
                   child: ListTile(
-                    leading: Icon(Icons.edit),
-                    title: Text('Edit'),
+                    leading: Icon(Icons.edit, color: Colors.black,),
+                    title: Text('Edit', style: TextStyle(color: Colors.black)),
                   )
           ),
           PopupMenuItem(
                   value: 'Delete',
                   child: ListTile(
-                    leading: Icon(Icons.delete_forever),
-                    title: Text('Delete'),
+                    leading: Icon(Icons.delete_forever, color: Colors.black,),
+                    title: Text('Delete', style: TextStyle(color: Colors.black)),
                   )
           ),
         ]
