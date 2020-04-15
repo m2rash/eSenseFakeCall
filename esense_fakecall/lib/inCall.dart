@@ -187,6 +187,8 @@ class InCallView extends StatelessWidget {
                 stopCall(); 
                 Navigator.pop(context);
                 if (Navigator.canPop(context)) {Navigator.pop(context);}
+                // for real FakeCalls
+                else {player.stop().then((val) {SystemChannels.platform.invokeMethod('SystemNavigator.pop');});}
               },
             ),
         )
