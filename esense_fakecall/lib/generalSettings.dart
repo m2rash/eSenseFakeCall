@@ -183,8 +183,8 @@ class ESenseTestState extends State<ESenseTest> {
 
   _setBatteryIcon(double voltage) {
     print('Battery Voltage: ' + voltage.toString());
-    if (voltage > 3) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.green,);});
-    else if (voltage > 2) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.yellow[800],);});
+    if (voltage > 3.98) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.green,);});
+    else if (voltage > 3.8) this.setState(() {this._batteryIcon = Icon(Icons.battery_full, color: Colors.yellow[800],);});
     else this.setState(() {this._batteryIcon = Icon(Icons.battery_alert, color: Colors.red);});
   }
 
