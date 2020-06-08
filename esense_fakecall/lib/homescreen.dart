@@ -1,6 +1,6 @@
 import 'package:eSenseFC/callSettings.dart';
-import 'package:eSenseFC/profileImage.dart';
-import 'package:eSenseFC/storage.dart';
+import 'package:eSenseFC/Essentials/profileImage.dart';
+import 'package:eSenseFC/Essentials/storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

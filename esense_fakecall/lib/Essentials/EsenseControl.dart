@@ -2,7 +2,7 @@ import 'dart:async';
 
 
 import 'package:device_apps/device_apps.dart';
-import 'main.dart';
+import '../main.dart';
 import 'package:esense_flutter/esense.dart';
 
 

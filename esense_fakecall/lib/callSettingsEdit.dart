@@ -1,10 +1,10 @@
-import 'package:eSenseFC/profileImage.dart';
+import 'package:eSenseFC/Essentials/profileImage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'incomingCall.dart';
-import 'storage.dart';
+import 'Essentials/storage.dart';
 
 
 class CallSettingsEditView extends StatelessWidget{

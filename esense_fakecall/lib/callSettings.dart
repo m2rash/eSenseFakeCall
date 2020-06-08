@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'callSettingsEdit.dart';
 import 'incomingCall.dart';
-import 'profileImage.dart';
-import 'storage.dart';
+import 'Essentials/profileImage.dart';
+import 'Essentials/storage.dart';
 
 class CallSettingsView extends StatelessWidget {
 

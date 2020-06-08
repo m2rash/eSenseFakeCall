@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:eSenseFC/EsenseControl.dart';
-import 'package:eSenseFC/main.dart';
-import 'package:eSenseFC/storage.dart';
+import 'package:eSenseFC/Essentials/EsenseControl.dart';
+import 'package:eSenseFC/Essentials/storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

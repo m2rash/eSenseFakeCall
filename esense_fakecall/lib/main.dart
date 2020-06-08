@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 
 
-import 'EsenseControl.dart';
-import 'storage.dart';
+import 'Essentials/EsenseControl.dart';
+import 'Essentials/storage.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
